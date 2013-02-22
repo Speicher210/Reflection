@@ -1,0 +1,31 @@
+{
+    "name":"wingu/reflection",
+    "description":"Wingu OctopusCore Reflection",
+    "version":"1.0.0",
+    "type":"library",
+    "keywords":[
+        "reflection"
+    ],
+    "license":"MIT",
+    "authors":[
+        {
+            "name":"Dragos Protung",
+            "email":"dragos.protung@speicher210.com",
+            "role":"Developer"
+        },
+        {
+            "name":"Antoine Verger",
+            "email":"antoine.verger@speicher210.com",
+            "role":"Developer"
+        }
+    ],
+    "require":{
+        "php":">=5.4"
+    },
+    "autoload":{
+        "psr-0":{
+            "Wingu\\OctopusCore\\Reflection\\":"src/",
+    		"Wingu\\OctopusCore\\Reflection\\Tests":"tests/"
+    	}
+    }
+}
