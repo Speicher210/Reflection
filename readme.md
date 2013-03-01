@@ -99,6 +99,33 @@ The above example will output something similar to::
    }
 ```
 
+Other usefull methods are:
+```php
+	$class->getBody(); // Get the body of the class.
+	$class->getUses(); // Returns an array of Wingu\OctopusCore\Reflection\ReflectionClassUse
+	$class->hasOwnMethod('method_name'); // Check if a method exists and is defined in this class and not a parent.
+```
+
+#### ReflectionClassUse
+
+This is a reflection upon the use statements in a class (traits).
+
+```php
+	class MyClass {
+
+    	use MyTrait {
+        	MyTrait::trait2Function2 as tf2;
+        	MyTrait::publicFunc as protected;
+        }
+        
+        use MyTrait2;
+    }
+    
+	$reflection = new ReflectionClassUse('MyClass', 'MyTrait');
+	
+	$reflection->getName(); // MyTrait
+	$reflection->getConflictResolutions();  // ['MyTrait::trait2Function2 as tf2', 'MyTrait::publicFunc as protected']
+```
 #### ReflectionConstant
 
 This object encapsulates the name-value as described above:
@@ -291,3 +318,4 @@ The output will be ::
 ```
 
 The custom Tag classes must implements the TagInterface.
+Refer to the ParamTag for a more advanced example.
