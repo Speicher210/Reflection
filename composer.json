@@ -1,7 +1,6 @@
 {
     "name":"wingu/reflection",
     "description":"Wingu OctopusCore Reflection",
-    "version":"1.0.1",
     "type":"library",
     "keywords":[
         "reflection"
