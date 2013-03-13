@@ -13,10 +13,10 @@ class ParamTagTest extends TestCase {
             ['type', 'type', null, null],
             [' type ', 'type', null, null],
             ['0 ', '0', null, null],
-            ['type name', 'type', 'name', null],
-            [' type   name ', 'type', 'name', null],
-            ['type name description', 'type', 'name', 'description'],
-            [' type  name  long description ', 'type', 'name', 'long description'],
+            ['type $name', 'type', '$name', null],
+            [' type   $name ', 'type', '$name', null],
+            ['type $name description', 'type', '$name', 'description'],
+            [' type  $name  long description ', 'type', '$name', 'long description'],
         );
     }
 

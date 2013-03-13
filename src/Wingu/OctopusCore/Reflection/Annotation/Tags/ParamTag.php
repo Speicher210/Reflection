@@ -4,6 +4,7 @@ namespace Wingu\OctopusCore\Reflection\Annotation\Tags;
 
 use Wingu\OctopusCore\Reflection\Annotation\AnnotationDefinition;
 use Wingu\OctopusCore\Reflection\Annotation\Exceptions\InvalidArgumentException;
+use Wingu\OctopusCore\Reflection\Annotation\Exceptions\RuntimeException;
 
 /**
  * Annotation for "@param" annotation tag.
@@ -59,6 +60,9 @@ class ParamTag extends BaseTag {
 
         if (isset($value[1]) === true && trim($value[1]) !== '') {
             $this->paramName = trim($value[1]);
+            if (strpos($this->paramName, '$') !== 0) {
+                throw new RuntimeException('The name of the parameter does not start with "$".');
+            }
         }
         if (isset($value[2]) === true && trim($value[2]) !== '') {
             $this->paramDescription = trim($value[2]);
