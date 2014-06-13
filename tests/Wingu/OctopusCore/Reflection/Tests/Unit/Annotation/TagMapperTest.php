@@ -27,7 +27,7 @@ class TagMapperTest extends TestCase {
 
     /**
      * @dataProvider getDataMapTagExceptionsInvalidTag
-     * @expectedException Wingu\OctopusCore\Reflection\Annotation\Exceptions\InvalidArgumentException
+     * @expectedException \Wingu\OctopusCore\Reflection\Annotation\Exceptions\InvalidArgumentException
      */
     public function testMapTagExceptionsInvalidTag($tag) {
         $tagMapper = new TagMapper();
@@ -36,7 +36,7 @@ class TagMapperTest extends TestCase {
     }
 
     /**
-     * @expectedException Wingu\OctopusCore\Reflection\Annotation\Exceptions\InvalidArgumentException
+     * @expectedException \Wingu\OctopusCore\Reflection\Annotation\Exceptions\InvalidArgumentException
      */
     public function testMapTagExceptionsInvalidClass() {
     	$tagMapper = new TagMapper();
@@ -66,7 +66,7 @@ class TagMapperTest extends TestCase {
     }
 
     /**
-     * @expectedException Wingu\OctopusCore\Reflection\Annotation\Exceptions\OutOfBoundsException
+     * @expectedException \Wingu\OctopusCore\Reflection\Annotation\Exceptions\OutOfBoundsException
      */
     public function testGetMappedTagException() {
     	$tagMapper = new TagMapper();

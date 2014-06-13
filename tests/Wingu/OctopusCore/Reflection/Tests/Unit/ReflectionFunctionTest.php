@@ -3,7 +3,6 @@
 namespace Wingu\OctopusCore\Reflection\Tests\Unit;
 
 use Wingu\OctopusCore\Reflection\ReflectionExtension;
-
 use Wingu\OctopusCore\Reflection\ReflectionParameter;
 use Wingu\OctopusCore\Reflection\ReflectionFunction;
 
@@ -57,9 +56,10 @@ class ReflectionFunctionTest extends TestCase {
     }
 
     /**
-     * @expectedException Wingu\OctopusCore\Reflection\Exceptions\RuntimeException
+     * @expectedException \Wingu\OctopusCore\Reflection\Exceptions\RuntimeException
+     * @expectedExceptionMessage Can not get body of a function that is internal.
      */
-    public function testblaGetBodyInternalFunction() {
+    public function testGetBodyInternalFunction() {
         $reflectionFunction = new ReflectionFunction('php_sapi_name');
         $reflectionFunction->getBody();
     }

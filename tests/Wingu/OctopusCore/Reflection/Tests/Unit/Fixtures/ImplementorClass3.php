@@ -4,7 +4,7 @@ namespace Wingu\OctopusCore\Reflection\Tests\Unit\Fixtures;
 
 /**
  *
- * ATENTION - DO NOT FORMAT THIS FILE - OTHERWISE GETBODY() TEST WILL FAILED
+ * ATTENTION - DO NOT FORMAT THIS FILE - OTHERWISE GETBODY() TEST WILL FAILED
  *
  */
 class ImplementorClass3 extends ImplementorClass1 implements Interface4 {

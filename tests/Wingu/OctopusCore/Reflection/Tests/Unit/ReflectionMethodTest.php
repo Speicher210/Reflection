@@ -13,6 +13,7 @@ class ReflectionMethodTest extends TestCase {
         $reflection = new ReflectionMethod('\ReflectionClass', 'getName');
         $actual = $reflection->getExtension();
         $expected = new ReflectionExtension('Reflection');
+        $this->assertEquals($expected, $actual);
     }
 
     public function testGetExtensionWithNotPHPExtensionClassReturnNull() {
@@ -95,7 +96,7 @@ class ReflectionMethodTest extends TestCase {
     }
 
     /**
-     * @expectedException Wingu\OctopusCore\Reflection\Exceptions\RuntimeException
+     * @expectedException \Wingu\OctopusCore\Reflection\Exceptions\RuntimeException
      */
     public function testGetBodyMethodFromInternalClass() {
     	$reflectionMethod = new ReflectionMethod('ArrayIterator', 'count');
@@ -103,7 +104,7 @@ class ReflectionMethodTest extends TestCase {
     }
 
     /**
-     * @expectedException Wingu\OctopusCore\Reflection\Exceptions\RuntimeException
+     * @expectedException \Wingu\OctopusCore\Reflection\Exceptions\RuntimeException
      */
     public function testGetBodyMethodFromAbstractClass() {
     	$reflectionMethod = new ReflectionMethod('Wingu\OctopusCore\Reflection\Tests\Unit\Fixtures\AbstractClass', 'getMethodAbstract');
@@ -111,7 +112,7 @@ class ReflectionMethodTest extends TestCase {
     }
 
     /**
-     * @expectedException Wingu\OctopusCore\Reflection\Exceptions\RuntimeException
+     * @expectedException \Wingu\OctopusCore\Reflection\Exceptions\RuntimeException
      */
     public function testGetBodyMethodFromInterface() {
     	$reflectionMethod = new ReflectionMethod('Wingu\OctopusCore\Reflection\Tests\Unit\Fixtures\SimpleInterface', 'simpleFunction');

@@ -43,7 +43,7 @@ class ReturnTagTest extends TestCase {
     }
 
     /**
-     * @expectedException Wingu\OctopusCore\Reflection\Annotation\Exceptions\InvalidArgumentException
+     * @expectedException \Wingu\OctopusCore\Reflection\Annotation\Exceptions\InvalidArgumentException
      */
     public function testReturnTagWrongAnnotationDefinition() {
         $ad = $this->getMock('Wingu\OctopusCore\Reflection\Annotation\AnnotationDefinition', ['getTag'], ['']);
@@ -51,6 +51,6 @@ class ReturnTagTest extends TestCase {
             ->method('getTag')
             ->will($this->returnValue('wrongtag'));
 
-        $returnTag = new ReturnTag($ad);
+        new ReturnTag($ad);
     }
 }

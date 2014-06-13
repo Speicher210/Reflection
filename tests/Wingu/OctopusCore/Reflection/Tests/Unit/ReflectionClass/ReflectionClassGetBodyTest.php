@@ -26,9 +26,9 @@ class ReflectionClassGetBodyTest extends TestCase {
     }
 
     /**
-     * @expectedException Wingu\OctopusCore\Reflection\Exceptions\RuntimeException
+     * @expectedException \Wingu\OctopusCore\Reflection\Exceptions\RuntimeException
      */
-    public function testblaGetBodyInternalClass() {
+    public function testGetBodyInternalClass() {
     	$reflection = new ReflectionClass('ReflectionClass');
     	$reflection->getBody();
     }

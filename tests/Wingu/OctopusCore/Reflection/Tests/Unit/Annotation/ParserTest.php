@@ -120,14 +120,14 @@ class ParserTest extends TestCase {
     }
 
     /**
-     * @expectedException Wingu\OctopusCore\Reflection\Annotation\Exceptions\RuntimeException
+     * @expectedException \Wingu\OctopusCore\Reflection\Annotation\Exceptions\RuntimeException
      */
-    public function testParseCommentWithAnnotationWithMultilineValueNotCloseNestedArrayThrowsRuntimeException() {
+    public function testParseCommentWithAnnotationWithMultiLineValueNotCloseNestedArrayThrowsRuntimeException() {
         $parser = new Parser('/** Test
                 * @annotationB(a b
                 * c d e f
                 */');
-        $actual = $parser->getFoundAnnotationDefinitions();
+        $parser->getFoundAnnotationDefinitions();
     }
 
     public function testParseCommentWithAnnotationWithDoubleArobaseAndValueReturnEmptyArray() {

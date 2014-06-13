@@ -54,7 +54,7 @@ class ReflectionClassUse implements \Reflector {
     /**
      * Constructor.
      *
-     * @param string $className The class name where the use statement is defined.
+     * @param string $class The class name where the use statement is defined.
      * @param string $name The name of the trait.
      */
     public function __construct($class, $name) {

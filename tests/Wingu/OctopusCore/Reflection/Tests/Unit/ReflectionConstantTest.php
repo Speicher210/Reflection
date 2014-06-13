@@ -2,7 +2,6 @@
 
 namespace Wingu\OctopusCore\Reflection\Tests\Unit;
 
-use Wingu\OctopusCore\Reflection\ReflectionDocComment;
 use Wingu\OctopusCore\Reflection\ReflectionClass;
 use Wingu\OctopusCore\Reflection\ReflectionConstant;
 

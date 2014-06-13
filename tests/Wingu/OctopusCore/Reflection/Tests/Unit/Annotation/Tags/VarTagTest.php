@@ -40,7 +40,7 @@ class VarTagTest extends TestCase {
     }
 
     /**
-     * @expectedException Wingu\OctopusCore\Reflection\Annotation\Exceptions\InvalidArgumentException
+     * @expectedException \Wingu\OctopusCore\Reflection\Annotation\Exceptions\InvalidArgumentException
      */
     public function testVarTagWrongAnnotationDefinition() {
     	$ad = $this->getMock('Wingu\OctopusCore\Reflection\Annotation\AnnotationDefinition', ['getTag'], ['']);
@@ -48,6 +48,6 @@ class VarTagTest extends TestCase {
         	->method('getTag')
         	->will($this->returnValue('wrongtag'));
 
-    	$varTag = new VarTag($ad);
+    	new VarTag($ad);
     }
 }

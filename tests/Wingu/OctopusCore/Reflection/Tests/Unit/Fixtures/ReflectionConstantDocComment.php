@@ -10,7 +10,7 @@ class ReflectionConstantDocComment {
     const CONSTANT2 = 'VALUE2';
 
     public function methodWithNormalBody() {
-        echo CONSTANT2;
+        echo self::CONSTANT2;
     }
 }
 
@@ -29,6 +29,6 @@ class ReflectionConstantDocComment {
     const CONSTANT2 = 'VALUE2';
 
     public function methodWithNormalBody() {
-        echo CONSTANT2;
+        echo self::CONSTANT2;
     }
 }

@@ -15,7 +15,7 @@ class AnnotationDefinition {
     protected $tag;
 
     /**
-     * The description text for the annotaion.
+     * The description text for the annotation.
      *
      * @var string
      */

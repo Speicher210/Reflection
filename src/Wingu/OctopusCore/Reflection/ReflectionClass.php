@@ -76,7 +76,7 @@ class ReflectionClass extends \ReflectionClass {
      * Gets a list of methods.
      *
      * @param integer $filter Filter for method types. This is an OR filter only.
-     * @return array
+     * @return \Wingu\OctopusCore\Reflection\ReflectionMethod[]
      */
     public function getMethods($filter = -1) {
         $return = parent::getMethods($filter);
@@ -91,7 +91,7 @@ class ReflectionClass extends \ReflectionClass {
      * Gets a list of own methods (not inherited).
      *
      * @param integer $filter Filter for method types.
-     * @return array
+     * @return \Wingu\OctopusCore\Reflection\ReflectionMethod[]
      */
     public function getOwnMethods($filter = -1) {
         $return = parent::getMethods($filter);
@@ -143,7 +143,7 @@ class ReflectionClass extends \ReflectionClass {
     /**
      * Get the parent class.
      *
-     * @return Wingu\OctopusCore\Reflection\ReflectionClass
+     * @return \Wingu\OctopusCore\Reflection\ReflectionClass
      */
     public function getParentClass() {
         $parent = parent::getParentClass();

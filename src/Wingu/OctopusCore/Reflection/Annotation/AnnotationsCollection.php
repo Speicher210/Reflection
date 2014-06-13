@@ -10,7 +10,7 @@ class AnnotationsCollection {
     /**
      * The parsed annotations definitions.
      *
-     * @var Wingu\OctopusCore\Reflection\Annotation\AnnotationDefinition[]
+     * @var \Wingu\OctopusCore\Reflection\Annotation\AnnotationDefinition[]
      */
     protected $annotationsDefinitions = array();
 
@@ -114,8 +114,8 @@ class AnnotationsCollection {
     /**
      * Build all the annotation instances for an annotation tag.
      *
-     * @param array $annotationDefinitions The annotation tag name.
-     * @return \Wingu\OctopusCore\Reflection\Annotation\Annotations\TagInterface[]
+     * @param \Wingu\OctopusCore\Reflection\Annotation\AnnotationDefinition[] $annotationDefinitions The annotation tag name.
+     * @return \Wingu\OctopusCore\Reflection\Annotation\Tags\TagInterface[]
      */
     protected function buildAnnotationsInstances(array $annotationDefinitions) {
         $result = array();
@@ -129,10 +129,10 @@ class AnnotationsCollection {
     /**
      * Build an annotation.
      *
-     * @param Wingu\OctopusCore\Reflection\Annotation\AnnotationDefinition $annotationDefinition The annotation definition.
-     * @return \Wingu\OctopusCore\Reflection\Annotation\Annotations\TagInterface
+     * @param \Wingu\OctopusCore\Reflection\Annotation\AnnotationDefinition $annotationDefinition The annotation definition.
+     * @return \Wingu\OctopusCore\Reflection\Annotation\Tags\TagInterface
      */
-    protected function buildAnnotationInstance(\Wingu\OctopusCore\Reflection\Annotation\AnnotationDefinition $annotationDefinition) {
+    protected function buildAnnotationInstance(AnnotationDefinition $annotationDefinition) {
         $class = $this->getAnnotationClass($annotationDefinition->getTag());
         $annotation = new $class($annotationDefinition);
 

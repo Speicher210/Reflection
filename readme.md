@@ -2,8 +2,8 @@
 
 ## Overview
 
-The Reflection Component allows you to introspect and reverse engineer functions, classes, extension and traits. 
-You can also retrieve the documentation from classes and functions. 
+The Reflection Component allows you to introspect and reverse engineer functions, classes, extension and traits.
+You can also retrieve the documentation from classes and functions.
 Included in this component, you will also find a toolbox for annotations reflection.
 
 ### Usage
@@ -14,7 +14,7 @@ We'll describe briefly the few additions of Wingu OctopusCore. Let start with re
 
 #### ReflectionClass
 
-The methods getOwnInterfaces, getOwnMethods, hasOwnMethod and getOwnProperties returns elements declared by the inspected class and not the ones defined by parent classes. 
+The methods getOwnInterfaces, getOwnMethods, hasOwnMethod and getOwnProperties returns elements declared by the inspected class and not the ones defined by parent classes.
 Here are some examples :
 
 ```php
@@ -55,7 +55,7 @@ $ownMethods = $class->getOwnMethods();
 var_dump($ownMethods);
 
 $ownInterfaces = $class->getOwnInterfaces();
-var_dump($ownMethods);   
+var_dump($ownMethods);
 
 $ownProperties = $class->getOwnProperties();
 var_dump($ownProperties);
@@ -99,7 +99,7 @@ The above example will output something similar to::
    }
 ```
 
-Other usefull methods are:
+Other useful methods are:
 ```php
 	$class->getBody(); // Get the body of the class.
 	$class->getUses(); // Returns an array of Wingu\OctopusCore\Reflection\ReflectionClassUse
@@ -117,12 +117,12 @@ This is a reflection upon the use statements in a class (traits).
         	MyTrait::trait2Function2 as tf2;
         	MyTrait::publicFunc as protected;
         }
-        
+
         use MyTrait2;
     }
-    
+
 	$reflection = new ReflectionClassUse('MyClass', 'MyTrait');
-	
+
 	$reflection->getName(); // MyTrait
 	$reflection->getConflictResolutions();  // ['MyTrait::trait2Function2 as tf2', 'MyTrait::publicFunc as protected']
 ```
@@ -132,13 +132,13 @@ This object encapsulates the name-value as described above:
 
 ```php
    use Wingu\OctopusCore\Reflection\ReflectionConstant;
-   
+
    class MyClass {
        const CONSTANT1 = 'MY_CONSTANT_VALUE1';
    }
-   
+
    $constant = new ReflectionConstant('MyClass', 'CONSTANT1');
-   var_dump($constant);   
+   var_dump($constant);
 ```
 
 The above example will output something similar to::
@@ -159,15 +159,15 @@ The above example will output something similar to::
      NULL
    }
 ```
-   
+
 
 #### ReflectionDocComment
 
-The ReflectionDocComment class allows you to extract and do some light-parsing on the structure of the comment: 
+The ReflectionDocComment class allows you to extract and do some light-parsing on the structure of the comment:
 
 ```php
    use Wingu\OctopusCore\Reflection\ReflectionDocComment;
-   
+
    $comment = new ReflectionDocComment('/**
        * This is a short description of MyClass
        * This is a long description of MyClass
@@ -176,7 +176,7 @@ The ReflectionDocComment class allows you to extract and do some light-parsing o
        * @category category1
        *
        */');
-   
+
    var_dump($comment);
 ```
 
@@ -194,19 +194,19 @@ The above example will output something similar to::
 
 You can also get the annotations collections (getAnnotationsCollection). The annotations functionalities are described in the Annotation section.
 
-You can get the ReflectionDocComment from element with the behavior which is supplied by ReflectionDocCommentTrait. 
+You can get the ReflectionDocComment from element with the behavior which is supplied by ReflectionDocCommentTrait.
 That means you can call the getReflectionDocComment method on objects of the following class: ReflectionClass, ReflectionFunction, ReflectionConstant, ReflectionMethod, ReflectionProperty.
 
 #### AnnotationsCollection
 
-From a ReflectionDocComment, you can extract a collection of Annotations through the getAnnotationsCollection which return an AnnotationsCollection object.  
+From a ReflectionDocComment, you can extract a collection of Annotations through the getAnnotationsCollection which return an AnnotationsCollection object.
 To extract the Tags which are the object encapsulation of the annotations, you will need to use the getAnnotations method.
-   
+
 Here is an example of how to use it :
 
 ```php
    use Wingu\OctopusCore\Reflection\ReflectionClass;
-   
+
    /**
     * This is my class
     *
@@ -214,9 +214,9 @@ Here is an example of how to use it :
     * @version 1.2.3
     */
    class MyClass{
-   
+
    }
-   
+
    $class = new ReflectionClass('MyClass');
    $comment = $class->getReflectionDocComment();
    $annotationsCollection = $comment->getAnnotationsCollection();
@@ -256,7 +256,7 @@ The above example will output something similar to::
      }
    }
 ```
-   
+
 #### TagMapper
 
 The TagMapper is used when you try to get the annotations (Tags) from a AnnotationsCollection object.
@@ -274,9 +274,9 @@ Here's an example of how you can use a TagMapper :
    use Wingu\OctopusCore\Reflection\ReflectionClass;
    use Wingu\OctopusCore\Reflection\ReflectionMethod;
    use Wingu\OctopusCore\Reflection\Annotation\TagMapper;
-   
+
    class MyClass {
-   
+
        /**
         * @myCustomTag Some description.
         */
@@ -284,26 +284,26 @@ Here's an example of how you can use a TagMapper :
            return 'return';
        }
    }
-   
+
    class MyCustomTag implements TagInterface {
-   
+
        public function getTagName() {
            return 'myCustomTag';
        }
-   
+
        public function getDescription() {
            // Parse and extract the description.
            return 'Some description.';
        }
    }
-   
+
    $class = new ReflectionMethod('MyClass', 'method1');
    $comment = $class->getReflectionDocComment();
    $annotationsCollection = $comment->getAnnotationsCollection();
-   
+
    $tagMapper = new TagMapper();
    $tagMapper->mapTag('myCustomTag', 'MyCustomTag');
-   
+
    $annotationsCollection->setTagMapper($tagMapper);
    var_dump($annotationsCollection->getAnnotations());
 ```

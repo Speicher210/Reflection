@@ -6,6 +6,11 @@ use Wingu\OctopusCore\Reflection\ReflectionClassUse;
 
 class ReflectionClassUseTest extends TestCase {
 
+    /**
+     * Data provider for testGetConflictResolutions().
+     *
+     * @return array
+     */
     public function getDataTraitNames() {
         return array(
             ['Wingu\OctopusCore\Reflection\Tests\Unit\Fixtures\ReflectionClassUseTestTrait0', []],
@@ -31,14 +36,15 @@ class ReflectionClassUseTest extends TestCase {
     }
 
     /**
-     * @expectedException Wingu\OctopusCore\Reflection\Exceptions\InvalidArgumentException
+     * @expectedException \Wingu\OctopusCore\Reflection\Exceptions\InvalidArgumentException
+     * @expectedExceptionMessage Could not find the trait "dummyTrait".
      */
     public function testInvalidTraitName() {
-    	$reflection = new ReflectionClassUse('Wingu\OctopusCore\Reflection\Tests\Unit\Fixtures\ReflectionClassUse', 'dummyTrait');
+    	new ReflectionClassUse('Wingu\OctopusCore\Reflection\Tests\Unit\Fixtures\ReflectionClassUse', 'dummyTrait');
     }
 
     /**
-     * @expectedException Wingu\OctopusCore\Reflection\Exceptions\InvalidArgumentException
+     * @expectedException \Wingu\OctopusCore\Reflection\Exceptions\InvalidArgumentException
      */
     public function testBadUseStatements() {
     	$mockReflectionClass = $this->getMock('Wingu\OctopusCore\Reflection\ReflectionClass', ['getBody'], [], '', false);
@@ -59,7 +65,7 @@ class ReflectionClassUseTest extends TestCase {
         ReflectionClassUse::export('\Wingu\OctopusCore\Reflection\Tests\Unit\Fixtures\ReflectionClassUse', 'Wingu\OctopusCore\Reflection\Tests\Unit\Fixtures\ReflectionClassUseTestTrait0');
     }
 
-    public function testExportWithConflicResolutions() {
+    public function testExportWithConflictResolutions() {
         $actual = ReflectionClassUse::export('\Wingu\OctopusCore\Reflection\Tests\Unit\Fixtures\ReflectionClassUse', 'Wingu\OctopusCore\Reflection\Tests\Unit\Fixtures\ReflectionClassUseTestTrait2', true);
         $expected  = 'ClassUse [ trait Wingu\OctopusCore\Reflection\Tests\Unit\Fixtures\ReflectionClassUseTestTrait2 ] {'.PHP_EOL;
         $expected .= 'ReflectionClassUseTestTrait2::trait2Function2 as tf2;'.PHP_EOL;

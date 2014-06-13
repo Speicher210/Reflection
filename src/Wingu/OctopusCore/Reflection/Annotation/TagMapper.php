@@ -11,7 +11,7 @@ use Wingu\OctopusCore\Reflection\Annotation\Exceptions\OutOfBoundsException;
 class TagMapper {
 
     /**
-     * An array of classes maped to the annotations tags.
+     * An array of classes mapped to the annotations tags.
      *
      * @var array
      */
@@ -21,17 +21,17 @@ class TagMapper {
      * Map an annotation tag to a class.
      *
      * @param string $tag The name of the annotation tag.
-     * @param string $class The class name to handle the annotaion. It must implement \Wingu\OctopusCore\Reflection\Annotation\Tags\TagInterface.
+     * @param string $class The class name to handle the annotation. It must implement \Wingu\OctopusCore\Reflection\Annotation\Tags\TagInterface.
      * @return \Wingu\OctopusCore\Reflection\Annotation\TagMapper
      * @throws \Wingu\OctopusCore\Reflection\Annotation\Exceptions\InvalidArgumentException If tag is invalid or class doesn't implement TagInterface.
      */
     public function mapTag($tag, $class) {
         if (preg_match('/^[A-Za-z0-9]+$/', $tag) <= 0) {
-            throw new Exceptions\InvalidArgumentException('The name of the tag annotation is invalid.');
+            throw new InvalidArgumentException('The name of the tag annotation is invalid.');
         }
 
         if (in_array('Wingu\OctopusCore\Reflection\Annotation\Tags\TagInterface', class_implements($class)) === false) {
-            throw new Exceptions\InvalidArgumentException('The class "'.$class.'" must implement "'.__NAMESPACE__.'\Tags\TagInterface".');
+            throw new InvalidArgumentException('The class "'.$class.'" must implement "'.__NAMESPACE__.'\Tags\TagInterface".');
         }
 
         $this->mappedTags[$tag] = $class;
@@ -68,7 +68,7 @@ class TagMapper {
         if (isset($this->mappedTags[$tag]) === true) {
             return $this->mappedTags[$tag];
         } else {
-            throw new Exceptions\OutOfBoundsException('Annotation tag "' . $tag . '" was not mapped.');
+            throw new OutOfBoundsException('Annotation tag "' . $tag . '" was not mapped.');
         }
     }
 

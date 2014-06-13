@@ -86,7 +86,7 @@ class ReflectionDocComment {
     }
 
     /**
-     * Get the long descrtiption.
+     * Get the long description.
      *
      * @return string
      */
@@ -113,7 +113,7 @@ class ReflectionDocComment {
     }
 
     /**
-     * Check if the documentation comment is emtpy or not.
+     * Check if the documentation comment is empty or not.
      *
      * @return boolean
      */

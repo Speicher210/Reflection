@@ -48,6 +48,9 @@ class Parser {
         $nesting = 0;
         $matches = array();
 
+        $name = '';
+        $value = '';
+
         for ($i = 0; $i < $commentStringLen; $i++) {
             $character = $commentString[$i];
 

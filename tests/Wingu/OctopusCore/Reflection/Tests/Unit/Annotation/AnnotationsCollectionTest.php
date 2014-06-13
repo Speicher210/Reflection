@@ -4,7 +4,6 @@ namespace Wingu\OctopusCore\Reflection\Tests\Unit\Annotation;
 
 use Wingu\OctopusCore\Reflection\Tests\Unit\TestCase;
 use Wingu\OctopusCore\Reflection\Annotation\AnnotationsCollection;
-use Wingu\OctopusCore\Reflection\Annotation\TagMapper;
 
 class AnnotationsCollectionTest extends TestCase {
 
@@ -84,7 +83,7 @@ class AnnotationsCollectionTest extends TestCase {
     /**
      * @dataProvider getDataOneAnnotation
      */
-    public function testOneAnnotation($comment, $tag, $decription) {
+    public function testOneAnnotation($comment) {
         $ac = new AnnotationsCollection($comment);
         $annotations = $ac->getAnnotations();
         $this->assertCount(1, $annotations);
@@ -193,7 +192,7 @@ class AnnotationsCollectionTest extends TestCase {
     }
 
     /**
-     * @expectedException Wingu\OctopusCore\Reflection\Annotation\Exceptions\OutOfBoundsException
+     * @expectedException \Wingu\OctopusCore\Reflection\Annotation\Exceptions\OutOfBoundsException
      */
     public function testGetAnnotationNotFound() {
         $ac = new AnnotationsCollection('');

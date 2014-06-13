@@ -121,9 +121,9 @@ class ReflectionConstant implements \Reflector {
         $lines = file($fileName, FILE_IGNORE_NEW_LINES);
 
         $declaringClassStartLine = $this->getDeclaringClass()->getStartLine() - 1;
-        $declaringClassLenght = $this->getDeclaringClass()->getEndLine() - $declaringClassStartLine + 1;
+        $declaringClassLength = $this->getDeclaringClass()->getEndLine() - $declaringClassStartLine + 1;
 
-        $currentClassLines = array_slice($lines, $declaringClassStartLine, $declaringClassLenght, true);
+        $currentClassLines = array_slice($lines, $declaringClassStartLine, $declaringClassLength, true);
 
         // Need the php open tag to tokenize the class.
         $tokens = token_get_all("<?php\n" . implode("\n", $currentClassLines));
