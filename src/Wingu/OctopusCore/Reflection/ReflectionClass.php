@@ -123,7 +123,11 @@ class ReflectionClass extends \ReflectionClass {
      * @return \Wingu\OctopusCore\Reflection\ReflectionMethod
      */
     public function getConstructor() {
-        return new ReflectionMethod($this, '__construct');
+        if ($this->hasMethod('__construct') === true) {
+            return $this->getMethod('__construct');
+        } else {
+            return null;
+        }
     }
 
     /**

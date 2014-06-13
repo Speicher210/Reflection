@@ -6,14 +6,10 @@ use Wingu\OctopusCore\Reflection\Tests\Unit\TestCase;
 use Wingu\OctopusCore\Reflection\ReflectionClass;
 use Wingu\OctopusCore\Reflection\ReflectionMethod;
 
+/**
+ * Test for ReflectionClassMethod.
+ */
 class ReflectionClassMethodsTest extends TestCase {
-
-    public function testGetConstructorWithoutConstructorReturnTheDefaultConstructor() {
-        $reflection = new ReflectionClass('\Wingu\OctopusCore\Reflection\Tests\Unit\Fixtures\EmptyClass');
-        $actualConstructor = $reflection->getConstructor();
-        $this->assertEquals('__construct', $actualConstructor->getName());
-        $this->assertInstanceOf("ReflectionMethod", $actualConstructor);
-    }
 
     public function testGetConstructorWithConstructorReturnConstructor() {
         $reflection = new ReflectionClass('\Wingu\OctopusCore\Reflection\Tests\Unit\Fixtures\ClassWithConstructor');

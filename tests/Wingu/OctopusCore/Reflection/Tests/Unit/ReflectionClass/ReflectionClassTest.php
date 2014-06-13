@@ -6,7 +6,16 @@ use Wingu\OctopusCore\Reflection\Tests\Unit\TestCase;
 use Wingu\OctopusCore\Reflection\ReflectionDocComment;
 use Wingu\OctopusCore\Reflection\ReflectionClass;
 
+/**
+ * Test for ReflectionClass.
+ */
 class ReflectionClassTest extends TestCase {
+
+    public function testGetConstructorWithoutConstructorReturnsNull() {
+        $reflection = new ReflectionClass('\Wingu\OctopusCore\Reflection\Tests\Unit\Fixtures\EmptyClass');
+        $actualConstructor = $reflection->getConstructor();
+        $this->assertNull($actualConstructor);
+    }
 
     public function testReflectAbstract() {
         $reflection = new ReflectionClass('\Wingu\OctopusCore\Reflection\Tests\Unit\Fixtures\AbstractClass');
