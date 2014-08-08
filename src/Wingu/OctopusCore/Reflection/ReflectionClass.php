@@ -51,7 +51,7 @@ class ReflectionClass extends \ReflectionClass {
     /**
      * Get interfaces that are implemented directly by the reflected class.
      *
-     * @return array
+     * @return \Wingu\OctopusCore\Reflection\ReflectionClass[]
      */
     public function getOwnInterfaces() {
         $parent = $this->getParentClass();
