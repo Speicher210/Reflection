@@ -10,7 +10,7 @@ use Wingu\OctopusCore\Reflection\Exceptions\InvalidArgumentException;
 class ReflectionClassUse implements \Reflector {
 
     /**
-     * The name of the constant.
+     * The name of the trait.
      *
      * @var string
      */

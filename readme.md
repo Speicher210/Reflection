@@ -261,7 +261,7 @@ The above example will output something similar to::
 
 The TagMapper is used when you try to get the annotations (Tags) from a AnnotationsCollection object.
 
-To build the Tag object corresponding to the annotation, the worklow is as follows :
+To build the Tag object corresponding to the annotation, the workflow is as follows :
 
 1. Use the TagMapper set by the setTagMapper method
 2. Use one of the Standard tag classes of the package Wingu\OctopusCore\Reflection\Annotation\Tags
