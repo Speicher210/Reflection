@@ -7,7 +7,8 @@ use Wingu\OctopusCore\Reflection\Exceptions\InvalidArgumentException;
 /**
  * Reflection about a class use statement.
  */
-class ReflectionClassUse implements \Reflector {
+class ReflectionClassUse implements \Reflector
+{
 
     /**
      * The name of the trait.
@@ -57,7 +58,8 @@ class ReflectionClassUse implements \Reflector {
      * @param string $class The class name where the use statement is defined.
      * @param string $name The name of the trait.
      */
-    public function __construct($class, $name) {
+    public function __construct($class, $name)
+    {
         $this->declaringClass = new ReflectionClass($class);
         $this->name = $name;
 
@@ -71,7 +73,8 @@ class ReflectionClassUse implements \Reflector {
      *
      * @return string
      */
-    public function getName() {
+    public function getName()
+    {
         return $this->name;
     }
 
@@ -80,7 +83,8 @@ class ReflectionClassUse implements \Reflector {
      *
      * @return array
      */
-    public function getConflictResolutions() {
+    public function getConflictResolutions()
+    {
         return $this->conflictResolutions;
     }
 
@@ -89,7 +93,8 @@ class ReflectionClassUse implements \Reflector {
      *
      * @throws \Wingu\OctopusCore\Reflection\Annotation\Exceptions\InvalidArgumentException If the trait is not found.
      */
-    protected function findConflictResolutions() {
+    protected function findConflictResolutions()
+    {
         $contents = '<?php' . PHP_EOL . $this->declaringClass->getBody();
         $this->tokens = token_get_all($contents);
         $this->tokensCount = count($this->tokens);
@@ -101,6 +106,7 @@ class ReflectionClassUse implements \Reflector {
                     $this->conflictResolutions = explode(';', implode('', $conflicts));
                     $this->conflictResolutions = array_map('trim', $this->conflictResolutions);
                     $this->conflictResolutions = array_filter($this->conflictResolutions);
+
                     return;
                 }
             }
@@ -114,7 +120,8 @@ class ReflectionClassUse implements \Reflector {
      *
      * @return array
      */
-    private function extractConflictsFromUseStatement() {
+    private function extractConflictsFromUseStatement()
+    {
         $class = '';
         $conflicts = array();
         $inConflicts = false;
@@ -131,28 +138,36 @@ class ReflectionClassUse implements \Reflector {
 
             if (($token[0] === T_STRING || $token[0] === T_NS_SEPARATOR) === true) {
                 $class .= $token[1];
-            } else if ($token === ',') {
-                if ($this->isSearchedTrait($class) === true) {
-                    return $conflicts;
-                }
-
-                $class = '';
-            } else if ($token === ';') {
-                if ($this->isSearchedTrait($class) === true) {
-                    return $conflicts;
-                } else {
-                    return null;
-                }
-            } else if ($token === '{') {
-                $inConflicts = true;
-            } else if ($token === '}') {
-                if ($this->isSearchedTrait($class) === true) {
-                    return $conflicts;
-                } else {
-                    return null;
-                }
             } else {
-                break;
+                if ($token === ',') {
+                    if ($this->isSearchedTrait($class) === true) {
+                        return $conflicts;
+                    }
+
+                    $class = '';
+                } else {
+                    if ($token === ';') {
+                        if ($this->isSearchedTrait($class) === true) {
+                            return $conflicts;
+                        } else {
+                            return null;
+                        }
+                    } else {
+                        if ($token === '{') {
+                            $inConflicts = true;
+                        } else {
+                            if ($token === '}') {
+                                if ($this->isSearchedTrait($class) === true) {
+                                    return $conflicts;
+                                } else {
+                                    return null;
+                                }
+                            } else {
+                                break;
+                            }
+                        }
+                    }
+                }
             }
         }
 
@@ -165,17 +180,19 @@ class ReflectionClassUse implements \Reflector {
      * @param string $name The name of the trait found.
      * @return boolean
      */
-    private function isSearchedTrait($name) {
+    private function isSearchedTrait($name)
+    {
         if ($this->name === $name) {
             return true;
         }
 
         if (strpos($name, '\\') === 0) {
-            return $this->name === $name || '\\'.$this->name === $name;
+            return $this->name === $name || '\\' . $this->name === $name;
         }
 
         $name = $this->declaringClass->getNamespaceName() . '\\' . $name;
-        return $this->name === $name || $this->name === '\\'.$name;
+
+        return $this->name === $name || $this->name === '\\' . $name;
     }
 
     /**
@@ -184,7 +201,8 @@ class ReflectionClassUse implements \Reflector {
      * @param boolean $includeWhiteSpace Flag if the whitespace should also be returned.
      * @return mixed
      */
-    private function next($includeWhiteSpace = false) {
+    private function next($includeWhiteSpace = false)
+    {
         for ($i = $this->tokenPos; $i < $this->tokensCount; $i++) {
             $this->tokenPos++;
             if (($includeWhiteSpace === false && $this->tokens[$i][0] === T_WHITESPACE) || $this->tokens[$i][0] === T_COMMENT) {
@@ -205,13 +223,15 @@ class ReflectionClassUse implements \Reflector {
      * @param boolean $return Flag if the export should be returned or not.
      * @return string
      */
-    public static function export($className, $name, $return = false) {
+    public static function export($className, $name, $return = false)
+    {
         $export = new self($className, $name);
-        $export = (string) $export;
+        $export = (string)$export;
         if ($return === true) {
             return $export;
         } else {
             echo $export;
+
             return null;
         }
     }
@@ -221,10 +241,11 @@ class ReflectionClassUse implements \Reflector {
      *
      * @return string
      */
-    public function __toString() {
+    public function __toString()
+    {
         $return = 'ClassUse [ trait ' . $this->name . ' ]';
         if (count($this->conflictResolutions) > 0) {
-            return  $return . ' {' . PHP_EOL . implode(';' . PHP_EOL, $this->conflictResolutions) . ';' . PHP_EOL . '}';
+            return $return . ' {' . PHP_EOL . implode(';' . PHP_EOL, $this->conflictResolutions) . ';' . PHP_EOL . '}';
         } else {
             return $return . ' { }';
         }

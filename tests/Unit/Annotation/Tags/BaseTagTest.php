@@ -2,12 +2,14 @@
 
 namespace Wingu\OctopusCore\Reflection\Tests\Unit\Annotation\Tags;
 
-use Wingu\OctopusCore\Reflection\Tests\Unit\TestCase;
 use Wingu\OctopusCore\Reflection\Annotation\Tags\BaseTag;
+use Wingu\OctopusCore\Reflection\Tests\Unit\TestCase;
 
-class BaseTagTest extends TestCase {
+class BaseTagTest extends TestCase
+{
 
-    public function getDataForAnnotationDefinition() {
+    public function getDataForAnnotationDefinition()
+    {
         return array(
             ['tag0', null, 'tag0', null],
             ['tag1', ' ', 'tag1', null],
@@ -19,8 +21,10 @@ class BaseTagTest extends TestCase {
     /**
      * @dataProvider getDataForAnnotationDefinition
      */
-    public function testBaseTag($tag, $description, $expectedTag, $expectedDescription) {
-        $ad = $this->getMock('Wingu\OctopusCore\Reflection\Annotation\AnnotationDefinition', ['getTag', 'getDescription'], ['']);
+    public function testBaseTag($tag, $description, $expectedTag, $expectedDescription)
+    {
+        $ad = $this->getMock('Wingu\OctopusCore\Reflection\Annotation\AnnotationDefinition',
+            ['getTag', 'getDescription'], ['']);
         $ad->expects($this->any())
             ->method('getTag')
             ->will($this->returnValue($tag));

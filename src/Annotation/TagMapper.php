@@ -8,7 +8,8 @@ use Wingu\OctopusCore\Reflection\Annotation\Exceptions\OutOfBoundsException;
 /**
  * A mapper to hold the relation between the annotation tag name and the class used to represent it.
  */
-class TagMapper {
+class TagMapper
+{
 
     /**
      * An array of classes mapped to the annotations tags.
@@ -25,16 +26,18 @@ class TagMapper {
      * @return \Wingu\OctopusCore\Reflection\Annotation\TagMapper
      * @throws \Wingu\OctopusCore\Reflection\Annotation\Exceptions\InvalidArgumentException If tag is invalid or class doesn't implement TagInterface.
      */
-    public function mapTag($tag, $class) {
+    public function mapTag($tag, $class)
+    {
         if (preg_match('/^[A-Za-z0-9]+$/', $tag) <= 0) {
             throw new InvalidArgumentException('The name of the tag annotation is invalid.');
         }
 
         if (in_array('Wingu\OctopusCore\Reflection\Annotation\Tags\TagInterface', class_implements($class)) === false) {
-            throw new InvalidArgumentException('The class "'.$class.'" must implement "'.__NAMESPACE__.'\Tags\TagInterface".');
+            throw new InvalidArgumentException('The class "' . $class . '" must implement "' . __NAMESPACE__ . '\Tags\TagInterface".');
         }
 
         $this->mappedTags[$tag] = $class;
+
         return $this;
     }
 
@@ -44,7 +47,8 @@ class TagMapper {
      * @param string $tag The name of the annotation tag.
      * @return boolean
      */
-    public function hasMappedTag($tag) {
+    public function hasMappedTag($tag)
+    {
         return isset($this->mappedTags[$tag]);
     }
 
@@ -53,7 +57,8 @@ class TagMapper {
      *
      * @return array
      */
-    public function getMappedTags() {
+    public function getMappedTags()
+    {
         return $this->mappedTags;
     }
 
@@ -64,7 +69,8 @@ class TagMapper {
      * @return string
      * @throws \Wingu\OctopusCore\Reflection\Annotation\Exceptions\OutOfBoundsException If the annotation tag was not mapped.
      */
-    public function getMappedTag($tag) {
+    public function getMappedTag($tag)
+    {
         if (isset($this->mappedTags[$tag]) === true) {
             return $this->mappedTags[$tag];
         } else {
@@ -79,7 +85,8 @@ class TagMapper {
      * @param boolean $overwrite Flag if the existing found annotations tags should be overwritten.
      * @return \Wingu\OctopusCore\Reflection\Annotation\TagMapper
      */
-    public function mergeTagMapper(TagMapper $tagMapper, $overwrite = true) {
+    public function mergeTagMapper(TagMapper $tagMapper, $overwrite = true)
+    {
         if ($overwrite === true) {
             $this->mappedTags = array_merge($this->mappedTags, $tagMapper->getMappedTags());
         } else {

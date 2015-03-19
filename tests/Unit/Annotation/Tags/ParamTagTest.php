@@ -2,12 +2,14 @@
 
 namespace Wingu\OctopusCore\Reflection\Tests\Unit\Annotation\Tags;
 
-use Wingu\OctopusCore\Reflection\Tests\Unit\TestCase;
 use Wingu\OctopusCore\Reflection\Annotation\Tags\ParamTag;
+use Wingu\OctopusCore\Reflection\Tests\Unit\TestCase;
 
-class ParamTagTest extends TestCase {
+class ParamTagTest extends TestCase
+{
 
-    public function getDataForAnnotationDefinition() {
+    public function getDataForAnnotationDefinition()
+    {
         return array(
             [' ', null, null, null],
             ['type', 'type', null, null],
@@ -23,8 +25,10 @@ class ParamTagTest extends TestCase {
     /**
      * @dataProvider getDataForAnnotationDefinition
      */
-    public function testParamTag($description, $expectedParamType, $expectedParamName, $expectedParamDescription) {
-        $ad = $this->getMock('Wingu\OctopusCore\Reflection\Annotation\AnnotationDefinition', ['getTag', 'getDescription'], ['']);
+    public function testParamTag($description, $expectedParamType, $expectedParamName, $expectedParamDescription)
+    {
+        $ad = $this->getMock('Wingu\OctopusCore\Reflection\Annotation\AnnotationDefinition',
+            ['getTag', 'getDescription'], ['']);
         $ad->expects($this->any())
             ->method('getTag')
             ->will($this->returnValue('param'));
@@ -42,12 +46,13 @@ class ParamTagTest extends TestCase {
     /**
      * @expectedException \Wingu\OctopusCore\Reflection\Annotation\Exceptions\InvalidArgumentException
      */
-    public function testVarTagWrongAnnotationDefinition() {
-    	$ad = $this->getMock('Wingu\OctopusCore\Reflection\Annotation\AnnotationDefinition', ['getTag'], ['']);
-    	$ad->expects($this->any())
-        	->method('getTag')
-        	->will($this->returnValue('wrongtag'));
+    public function testVarTagWrongAnnotationDefinition()
+    {
+        $ad = $this->getMock('Wingu\OctopusCore\Reflection\Annotation\AnnotationDefinition', ['getTag'], ['']);
+        $ad->expects($this->any())
+            ->method('getTag')
+            ->will($this->returnValue('wrongtag'));
 
-    	new ParamTag($ad);
+        new ParamTag($ad);
     }
 }

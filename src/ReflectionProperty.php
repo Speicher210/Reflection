@@ -5,7 +5,8 @@ namespace Wingu\OctopusCore\Reflection;
 /**
  * Reflection about a property.
  */
-class ReflectionProperty extends \ReflectionProperty {
+class ReflectionProperty extends \ReflectionProperty
+{
 
     use ReflectionDocCommentTrait;
 
@@ -14,7 +15,8 @@ class ReflectionProperty extends \ReflectionProperty {
      *
      * @return \Wingu\OctopusCore\Reflection\ReflectionClass
      */
-    public function getDeclaringClass() {
+    public function getDeclaringClass()
+    {
         return new ReflectionClass(parent::getDeclaringClass()->getName());
     }
 
@@ -23,7 +25,8 @@ class ReflectionProperty extends \ReflectionProperty {
      *
      * @return mixed
      */
-    public function getDefaultValue() {
+    public function getDefaultValue()
+    {
         return $this->getDeclaringClass()->getDefaultProperties()[$this->name];
     }
 }

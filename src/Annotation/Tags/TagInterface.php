@@ -5,7 +5,8 @@ namespace Wingu\OctopusCore\Reflection\Annotation\Tags;
 /**
  * Interface for annotations.
  */
-interface TagInterface {
+interface TagInterface
+{
 
     /**
      * Get the tag name of the annotation.

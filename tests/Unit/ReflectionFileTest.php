@@ -4,9 +4,11 @@ namespace Wingu\OctopusCore\Reflection\Tests\Unit;
 
 use Wingu\OctopusCore\Reflection\ReflectionFile;
 
-class ReflectionFileTest extends TestCase {
+class ReflectionFileTest extends TestCase
+{
 
-    public function testReflectFileWithSingleNamespaceAndNoUses() {
+    public function testReflectFileWithSingleNamespaceAndNoUses()
+    {
         $reflectedFilePath = __DIR__ . '/Fixtures/TestReflectFileWithSingleNamespaceAndNoUses.php';
 
         $reflectionFile = new ReflectionFile($reflectedFilePath);
@@ -15,7 +17,8 @@ class ReflectionFileTest extends TestCase {
         $this->assertSame($expectedNamespaces, $reflectionFile->getNamespaces());
     }
 
-    public function testReflectFileWithMultipleNamespaces() {
+    public function testReflectFileWithMultipleNamespaces()
+    {
         $reflectedFilePath = __DIR__ . '/Fixtures/TestReflectFileWithMultipleNamespaces.php';
 
         $reflectionFile = new ReflectionFile($reflectedFilePath);
@@ -27,7 +30,8 @@ class ReflectionFileTest extends TestCase {
         $this->assertSame($expectedNamespaces, $reflectionFile->getNamespaces());
     }
 
-    public function testReflectFileWithNoNamespaceUseStatementsButWithTraitUseStatements() {
+    public function testReflectFileWithNoNamespaceUseStatementsButWithTraitUseStatements()
+    {
         $reflectedFilePath = __DIR__ . '/Fixtures/TestReflectFileWithNoNamespaceUseStatementsButWithTraitUseStatements.php';
 
         $reflectionFile = new ReflectionFile($reflectedFilePath);
@@ -38,7 +42,8 @@ class ReflectionFileTest extends TestCase {
         $this->assertSame($expectedNamespaces, $reflectionFile->getUses());
     }
 
-    public function testReflectFileWithUseStatementsAndOneObject() {
+    public function testReflectFileWithUseStatementsAndOneObject()
+    {
         $reflectedFilePath = __DIR__ . '/Fixtures/TestReflectFileWithUseStatementsAndOneObject.php';
 
         $expectedNamespaces = array('\Wingu\OctopusCore\Reflection\Tests\Unit\Fixtures');
@@ -61,7 +66,8 @@ class ReflectionFileTest extends TestCase {
         $this->assertInstanceOf('Wingu\OctopusCore\Reflection\ReflectionClass', $objects[0]);
     }
 
-    public function testResolveFqnToAlias() {
+    public function testResolveFqnToAlias()
+    {
         $mock = $this->getMockBuilder('Wingu\OctopusCore\Reflection\ReflectionFile')
             ->setMethods(array('getUses'))
             ->disableOriginalConstructor()->getMock();

@@ -5,7 +5,8 @@ namespace Wingu\OctopusCore\Reflection\Annotation;
 /**
  * Annotations parser class.
  */
-class Parser {
+class Parser
+{
 
     const SKIP = -1;
 
@@ -37,11 +38,12 @@ class Parser {
      * @param string $commentString The comment string to parse.
      * @throws \Wingu\OctopusCore\Reflection\Annotation\Exceptions\RuntimeException If the comment can not be parsed.
      */
-    public function __construct($commentString) {
+    public function __construct($commentString)
+    {
         $this->originalComment = $commentString;
 
         $commentString = trim(preg_replace('/^[\/\*\# \t]+/m', '', $commentString));
-        $commentString = str_replace("\r\n", "\n", $commentString)."\n";
+        $commentString = str_replace("\r\n", "\n", $commentString) . "\n";
         $commentStringLen = strlen($commentString);
 
         $state = self::SCAN;
@@ -60,8 +62,10 @@ class Parser {
                         $name = '';
                         $value = '';
                         $state = self::NAME;
-                    } else if ($character !== "\n" && $character !== ' ' && $character !== "\t") {
-                        $state = self::SKIP;
+                    } else {
+                        if ($character !== "\n" && $character !== ' ' && $character !== "\t") {
+                            $state = self::SKIP;
+                        }
                     }
                     break;
 
@@ -75,17 +79,23 @@ class Parser {
                     $m = preg_match('/[a-zA-Z0-9\-\\\\]/', $character);
                     if ($m !== 0 && $m !== false) {
                         $name .= $character;
-                    } else if ($character === ' ') {
-                        $state = self::COPY_LINE;
-                    } else if ($character === '(') {
-                        $nesting++;
-                        $value = $character;
-                        $state = self::COPY_ARRAY;
-                    } else if ($character === "\n") {
-                        $matches[$name][] = new AnnotationDefinition($name);
-                        $state = self::SCAN;
                     } else {
-                        $state = self::SKIP;
+                        if ($character === ' ') {
+                            $state = self::COPY_LINE;
+                        } else {
+                            if ($character === '(') {
+                                $nesting++;
+                                $value = $character;
+                                $state = self::COPY_ARRAY;
+                            } else {
+                                if ($character === "\n") {
+                                    $matches[$name][] = new AnnotationDefinition($name);
+                                    $state = self::SCAN;
+                                } else {
+                                    $state = self::SKIP;
+                                }
+                            }
+                        }
                     }
                     break;
 
@@ -121,7 +131,7 @@ class Parser {
             throw new Exceptions\RuntimeException('The comment is not valid and can not be parsed.');
         }
 
-        return $this->foundAnnotationDefinitions = $matches;
+        $this->foundAnnotationDefinitions = $matches;
     }
 
     /**
@@ -129,8 +139,8 @@ class Parser {
      *
      * @return \Wingu\OctopusCore\Reflection\Annotation\AnnotationDefinition[]
      */
-    public function getFoundAnnotationDefinitions() {
+    public function getFoundAnnotationDefinitions()
+    {
         return $this->foundAnnotationDefinitions;
     }
-
 }

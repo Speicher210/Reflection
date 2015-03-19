@@ -2,12 +2,14 @@
 
 namespace Wingu\OctopusCore\Reflection\Tests\Unit\Annotation\Tags;
 
-use Wingu\OctopusCore\Reflection\Tests\Unit\TestCase;
 use Wingu\OctopusCore\Reflection\Annotation\Tags\VarTag;
+use Wingu\OctopusCore\Reflection\Tests\Unit\TestCase;
 
-class VarTagTest extends TestCase {
+class VarTagTest extends TestCase
+{
 
-    public function getDataForAnnotationDefinition() {
+    public function getDataForAnnotationDefinition()
+    {
         return array(
             [null, null],
             ['', null],
@@ -24,8 +26,10 @@ class VarTagTest extends TestCase {
     /**
      * @dataProvider getDataForAnnotationDefinition
      */
-    public function testVarTag($description, $expectedVarType) {
-        $ad = $this->getMock('Wingu\OctopusCore\Reflection\Annotation\AnnotationDefinition', ['getTag', 'getDescription'], ['']);
+    public function testVarTag($description, $expectedVarType)
+    {
+        $ad = $this->getMock('Wingu\OctopusCore\Reflection\Annotation\AnnotationDefinition',
+            ['getTag', 'getDescription'], ['']);
         $ad->expects($this->any())
             ->method('getTag')
             ->will($this->returnValue('var'));
@@ -42,12 +46,13 @@ class VarTagTest extends TestCase {
     /**
      * @expectedException \Wingu\OctopusCore\Reflection\Annotation\Exceptions\InvalidArgumentException
      */
-    public function testVarTagWrongAnnotationDefinition() {
-    	$ad = $this->getMock('Wingu\OctopusCore\Reflection\Annotation\AnnotationDefinition', ['getTag'], ['']);
-    	$ad->expects($this->any())
-        	->method('getTag')
-        	->will($this->returnValue('wrongtag'));
+    public function testVarTagWrongAnnotationDefinition()
+    {
+        $ad = $this->getMock('Wingu\OctopusCore\Reflection\Annotation\AnnotationDefinition', ['getTag'], ['']);
+        $ad->expects($this->any())
+            ->method('getTag')
+            ->will($this->returnValue('wrongtag'));
 
-    	new VarTag($ad);
+        new VarTag($ad);
     }
 }

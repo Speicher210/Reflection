@@ -7,7 +7,8 @@ use Wingu\OctopusCore\Reflection\Exceptions\RuntimeException;
 /**
  * Reflection about a class.
  */
-class ReflectionClass extends \ReflectionClass {
+class ReflectionClass extends \ReflectionClass
+{
 
     use ReflectionDocCommentTrait;
 
@@ -17,19 +18,26 @@ class ReflectionClass extends \ReflectionClass {
      * @return string
      * @throws \Wingu\OctopusCore\Reflection\Exceptions\RuntimeException If the class is internal.
      */
-    public function getBody() {
+    public function getBody()
+    {
         $fileName = $this->getFileName();
         if ($fileName === false) {
             throw new RuntimeException('Can not get body of a class that is internal.');
         }
 
         $lines = file($fileName, FILE_IGNORE_NEW_LINES);
-        $lines = array_slice($lines, $this->getStartLine() - 1, ($this->getEndLine() - $this->getStartLine() + 1), true);
+        $lines = array_slice(
+            $lines,
+            $this->getStartLine() - 1,
+            ($this->getEndLine() - $this->getStartLine() + 1),
+            true
+        );
         $lines = implode("\n", $lines);
 
         $firstBracketPos = strpos($lines, '{');
         $lastBracketPost = strrpos($lines, '}');
         $body = substr($lines, $firstBracketPos + 1, $lastBracketPost - $firstBracketPos - 1);
+
         return trim(rtrim($body), "\n\r");
     }
 
@@ -38,10 +46,11 @@ class ReflectionClass extends \ReflectionClass {
      *
      * @return \Wingu\OctopusCore\Reflection\ReflectionClass[]
      */
-    public function getInterfaces() {
+    public function getInterfaces()
+    {
         $return = array();
 
-        foreach (parent::getInterfaceNames() as $interface) {
+        foreach ($this->getInterfaceNames() as $interface) {
             $return[$interface] = new static($interface);
         }
 
@@ -53,7 +62,8 @@ class ReflectionClass extends \ReflectionClass {
      *
      * @return \Wingu\OctopusCore\Reflection\ReflectionClass[]
      */
-    public function getOwnInterfaces() {
+    public function getOwnInterfaces()
+    {
         $parent = $this->getParentClass();
         if ($parent !== false) {
             return array_diff_key($this->getInterfaces(), $parent->getInterfaces());
@@ -68,7 +78,8 @@ class ReflectionClass extends \ReflectionClass {
      * @param string $name The method name.
      * @return \Wingu\OctopusCore\Reflection\ReflectionMethod
      */
-    public function getMethod($name) {
+    public function getMethod($name)
+    {
         return new ReflectionMethod($this->getName(), $name);
     }
 
@@ -78,7 +89,8 @@ class ReflectionClass extends \ReflectionClass {
      * @param integer $filter Filter for method types. This is an OR filter only.
      * @return \Wingu\OctopusCore\Reflection\ReflectionMethod[]
      */
-    public function getMethods($filter = -1) {
+    public function getMethods($filter = -1)
+    {
         $return = parent::getMethods($filter);
         foreach ($return as $key => $val) {
             $return[$key] = new ReflectionMethod($this->getName(), $val->getName());
@@ -93,8 +105,9 @@ class ReflectionClass extends \ReflectionClass {
      * @param integer $filter Filter for method types.
      * @return \Wingu\OctopusCore\Reflection\ReflectionMethod[]
      */
-    public function getOwnMethods($filter = -1) {
-        $return = parent::getMethods($filter);
+    public function getOwnMethods($filter = -1)
+    {
+        $return = $this->getMethods($filter);
 
         $traitMethods = $traitAliases = array();
         foreach ($this->getTraits() as $trait) {
@@ -122,7 +135,8 @@ class ReflectionClass extends \ReflectionClass {
      *
      * @return \Wingu\OctopusCore\Reflection\ReflectionMethod
      */
-    public function getConstructor() {
+    public function getConstructor()
+    {
         if ($this->hasMethod('__construct') === true) {
             return $this->getMethod('__construct');
         } else {
@@ -136,9 +150,10 @@ class ReflectionClass extends \ReflectionClass {
      * @param string $name Name of the method being checked for.
      * @return boolean
      */
-    public function hasOwnMethod($name) {
-        if (parent::hasMethod($name) === true) {
-            return parent::getMethod($name)->class === $this->getName();
+    public function hasOwnMethod($name)
+    {
+        if ($this->hasMethod($name) === true) {
+            return $this->getMethod($name)->class === $this->getName();
         } else {
             return false;
         }
@@ -149,8 +164,10 @@ class ReflectionClass extends \ReflectionClass {
      *
      * @return \Wingu\OctopusCore\Reflection\ReflectionClass
      */
-    public function getParentClass() {
+    public function getParentClass()
+    {
         $parent = parent::getParentClass();
+
         return ($parent !== false) ? new static($parent->getName()) : false;
     }
 
@@ -160,7 +177,8 @@ class ReflectionClass extends \ReflectionClass {
      * @param string $name Name of the property.
      * @return \Wingu\OctopusCore\Reflection\ReflectionProperty
      */
-    public function getProperty($name) {
+    public function getProperty($name)
+    {
         return new ReflectionProperty($this->getName(), $name);
     }
 
@@ -170,7 +188,8 @@ class ReflectionClass extends \ReflectionClass {
      * @param integer $filter Filter for the properties.
      * @return \Wingu\OctopusCore\Reflection\ReflectionProperty[]
      */
-    public function getProperties($filter = -1) {
+    public function getProperties($filter = -1)
+    {
         $properties = parent::getProperties($filter);
         foreach ($properties as $key => $val) {
             $properties[$key] = new ReflectionProperty($this->getName(), $val->getName());
@@ -185,7 +204,8 @@ class ReflectionClass extends \ReflectionClass {
      * @param integer $filter Filter for the properties.
      * @return \Wingu\OctopusCore\Reflection\ReflectionProperty[]
      */
-    public function getOwnProperties($filter = -1) {
+    public function getOwnProperties($filter = -1)
+    {
         $return = $this->getProperties($filter);
 
         $traitProperties = array();
@@ -211,12 +231,14 @@ class ReflectionClass extends \ReflectionClass {
      *
      * @return \Wingu\OctopusCore\Reflection\ReflectionConstant[] the array of constants
      */
-    public function getConstants() {
+    public function getConstants()
+    {
         $constants = parent::getConstants();
         $returnConstants = array();
         foreach ($constants as $key => $value) {
             $returnConstants[$key] = new ReflectionConstant($this->getName(), $key);
         }
+
         return $returnConstants;
     }
 
@@ -225,7 +247,8 @@ class ReflectionClass extends \ReflectionClass {
      *
      * @return \Wingu\OctopusCore\Reflection\ReflectionConstant[]
      */
-    public function getOwnConstants() {
+    public function getOwnConstants()
+    {
         if ($this->getParentClass() === false) {
             return $this->getConstants();
         } else {
@@ -238,7 +261,8 @@ class ReflectionClass extends \ReflectionClass {
      *
      * @return \Wingu\OctopusCore\Reflection\ReflectionClass[]
      */
-    public function getTraits() {
+    public function getTraits()
+    {
         $return = parent::getTraits();
         if ($return !== null) {
             foreach ($return as $key => $val) {
@@ -254,7 +278,8 @@ class ReflectionClass extends \ReflectionClass {
      *
      * @return \Wingu\OctopusCore\Reflection\ReflectionClassUse[]
      */
-    public function getUses() {
+    public function getUses()
+    {
         $return = array();
         foreach ($this->getTraitNames() as $traitName) {
             $return[] = new ReflectionClassUse($this->name, $traitName);
@@ -268,7 +293,8 @@ class ReflectionClass extends \ReflectionClass {
      *
      * @return \Wingu\OctopusCore\Reflection\ReflectionExtension
      */
-    public function getExtension() {
+    public function getExtension()
+    {
         $extensionName = $this->getExtensionName();
         if ($extensionName !== false) {
             return new ReflectionExtension($extensionName);

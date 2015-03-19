@@ -8,7 +8,8 @@ use Wingu\OctopusCore\Reflection\Annotation\Exceptions\InvalidArgumentException;
 /**
  * Annotation for "@return" annotation tag.
  */
-class ReturnTag extends BaseTag {
+class ReturnTag extends BaseTag
+{
 
     /**
      * The return type.
@@ -30,7 +31,8 @@ class ReturnTag extends BaseTag {
      * @param \Wingu\OctopusCore\Reflection\Annotation\AnnotationDefinition $definition The annotation definition.
      * @throws \Wingu\OctopusCore\Reflection\Annotation\Exceptions\InvalidArgumentException If the definition is not valid.
      */
-    public function __construct(AnnotationDefinition $definition) {
+    public function __construct(AnnotationDefinition $definition)
+    {
         if ($definition->getTag() !== 'return') {
             throw new InvalidArgumentException('The definition tag must be "return".');
         }
@@ -41,7 +43,8 @@ class ReturnTag extends BaseTag {
     /**
      * Initialize the annotation tag.
      */
-    protected function initTag() {
+    protected function initTag()
+    {
         parent::initTag();
 
         $value = preg_split('/[\s]+/', $this->description, 2);
@@ -59,7 +62,8 @@ class ReturnTag extends BaseTag {
      *
      * @return string
      */
-    public function getReturnType() {
+    public function getReturnType()
+    {
         return $this->returnType;
     }
 
@@ -68,7 +72,8 @@ class ReturnTag extends BaseTag {
      *
      * @return string
      */
-    public function getReturnDescription() {
+    public function getReturnDescription()
+    {
         return $this->returnDescription;
     }
 }

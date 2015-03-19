@@ -2,12 +2,14 @@
 
 namespace Wingu\OctopusCore\Reflection\Tests\Unit\ReflectionClass;
 
-use Wingu\OctopusCore\Reflection\Tests\Unit\TestCase;
 use Wingu\OctopusCore\Reflection\ReflectionClass;
+use Wingu\OctopusCore\Reflection\Tests\Unit\TestCase;
 
-class ReflectionClassExtensionTest extends TestCase {
+class ReflectionClassExtensionTest extends TestCase
+{
 
-    public function testGetExtension() {
+    public function testGetExtension()
+    {
         $reflection = new ReflectionClass('\ReflectionClass');
         $extension = $reflection->getExtension();
         $this->assertInstanceOf('\Wingu\OctopusCore\Reflection\ReflectionExtension', $extension);

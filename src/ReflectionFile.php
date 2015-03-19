@@ -5,7 +5,8 @@ namespace Wingu\OctopusCore\Reflection;
 /**
  * Reflection of a PHP file.
  */
-class ReflectionFile {
+class ReflectionFile
+{
 
     /**
      * The file that is reflected.
@@ -47,7 +48,8 @@ class ReflectionFile {
      *
      * @param string $reflectedFilePath The file path to reflect.
      */
-    public function __construct($reflectedFilePath) {
+    public function __construct($reflectedFilePath)
+    {
         $realPath = realpath($reflectedFilePath);
         if ($realPath === false) {
             throw new \RuntimeException('File "' . $realPath . '" does not exist or is not valid.');
@@ -62,7 +64,8 @@ class ReflectionFile {
     /**
      * Do the reflection to gather data.
      */
-    private function reflect() {
+    private function reflect()
+    {
         $tokens = token_get_all($this->reflectedFileContent);
         $namespace = null;
         $classLevel = 0;
@@ -75,7 +78,7 @@ class ReflectionFile {
                 case T_TRAIT:
                     if ($name = $this->fetch($tokens, array(T_STRING))) {
                         $classLevel = $level + 1;
-                        if ($namespace) {
+                        if ($namespace !== null) {
                             $objectFQN = $namespace . '\\' . $name;
                         } else {
                             $objectFQN = $name;
@@ -89,7 +92,7 @@ class ReflectionFile {
                     $uses = array();
                     break;
                 case T_USE:
-                    if ($classLevel == 0) {
+                    if ($classLevel === 0) {
                         while ($name = $this->fetch($tokens, array(T_STRING, T_NS_SEPARATOR))) {
                             $name = '\\' . ltrim($name, '\\');
                             if ($this->fetch($tokens, array(T_AS))) {
@@ -111,7 +114,7 @@ class ReflectionFile {
                     break;
                 case '}':
                     if ($level === $classLevel) {
-                        $classLevel = null;
+                        $classLevel = 0;
                     }
                     $level--;
                     break;
@@ -129,7 +132,8 @@ class ReflectionFile {
      * @param array $take The tokens to look for.
      * @return null|string
      */
-    private function fetch(& $tokens, array $take) {
+    private function fetch(& $tokens, array $take)
+    {
         $res = null;
         while ($token = current($tokens)) {
             list($token, $s) = is_array($token) ? $token : array($token, $token);
@@ -149,7 +153,8 @@ class ReflectionFile {
      *
      * @return string
      */
-    public function getFilePath() {
+    public function getFilePath()
+    {
         return $this->reflectedFilePath;
     }
 
@@ -158,7 +163,8 @@ class ReflectionFile {
      *
      * @return array
      */
-    public function getNamespaces() {
+    public function getNamespaces()
+    {
         return $this->namespaces;
     }
 
@@ -167,7 +173,8 @@ class ReflectionFile {
      *
      * @return array
      */
-    public function getUses() {
+    public function getUses()
+    {
         return $this->uses;
     }
 
@@ -176,7 +183,8 @@ class ReflectionFile {
      *
      * @return \Reflector[]
      */
-    public function getObjects() {
+    public function getObjects()
+    {
         return $this->objects;
     }
 
@@ -186,11 +194,13 @@ class ReflectionFile {
      * @param string $fqn The fully qualified name to get the alias for.
      * @return string
      */
-    public function resolveFqnToAlias($fqn) {
+    public function resolveFqnToAlias($fqn)
+    {
         foreach ($this->getUses() as $namespace => $uses) {
             $alias = array_search($fqn, $uses, true);
             if ($alias) {
                 $parts = explode('\\', $alias);
+
                 return end($parts);
             }
         }

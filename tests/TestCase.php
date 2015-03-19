@@ -5,7 +5,8 @@ namespace Wingu\OctopusCore\Reflection\Tests;
 /**
  * Base class for test cases.
  */
-abstract class TestCase extends \PHPUnit_Framework_TestCase {
+abstract class TestCase extends \PHPUnit_Framework_TestCase
+{
 
     /**
      * This is a helper method to call a private/protected method on an object.
@@ -15,10 +16,12 @@ abstract class TestCase extends \PHPUnit_Framework_TestCase {
      * @param array $args The arguments for the method.
      * @return mixed
      */
-    public function callMethod($obj, $methodName, array $args = array()) {
+    public function callMethod($obj, $methodName, array $args = array())
+    {
         $class = new \ReflectionClass($obj);
         $method = $class->getMethod($methodName);
         $method->setAccessible(true);
+
         return $method->invokeArgs($obj, $args);
     }
 
@@ -29,7 +32,8 @@ abstract class TestCase extends \PHPUnit_Framework_TestCase {
      * @param string $property The name of the property to set.
      * @param mixed $value The value to set.
      */
-    public function setProperty($obj, $property, $value) {
+    public function setProperty($obj, $property, $value)
+    {
         $class = new \ReflectionClass($obj);
         $property = $class->getProperty($property);
         $property->setAccessible(true);
@@ -43,11 +47,13 @@ abstract class TestCase extends \PHPUnit_Framework_TestCase {
      * @param string $property The name of the property to get.
      * @return mixed
      */
-    public function getProperty($obj, $property) {
-    	$class = new \ReflectionClass($obj);
-    	$property = $class->getProperty($property);
-    	$property->setAccessible(true);
-    	return $property->getValue($obj);
+    public function getProperty($obj, $property)
+    {
+        $class = new \ReflectionClass($obj);
+        $property = $class->getProperty($property);
+        $property->setAccessible(true);
+
+        return $property->getValue($obj);
     }
 
 }

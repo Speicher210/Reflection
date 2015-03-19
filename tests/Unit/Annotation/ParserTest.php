@@ -2,20 +2,23 @@
 
 namespace Wingu\OctopusCore\Reflection\Tests\Unit\Annotation;
 
-use Wingu\OctopusCore\Reflection\Tests\Unit\TestCase;
-use Wingu\OctopusCore\Reflection\Annotation\Parser;
 use Wingu\OctopusCore\Reflection\Annotation\AnnotationDefinition;
+use Wingu\OctopusCore\Reflection\Annotation\Parser;
+use Wingu\OctopusCore\Reflection\Tests\Unit\TestCase;
 
-class ParserTest extends TestCase {
+class ParserTest extends TestCase
+{
 
-    public function testParseWithEmptyCommentReturnEmptyArray() {
+    public function testParseWithEmptyCommentReturnEmptyArray()
+    {
         $parser = new Parser('');
         $actual = $parser->getFoundAnnotationDefinitions();
         $expected = array();
         $this->assertEquals($expected, $actual);
     }
 
-    public function testParseCommentWithNoRealAnnotationsReturnEmptyArray() {
+    public function testParseCommentWithNoRealAnnotationsReturnEmptyArray()
+    {
         $parser = new Parser('/** Test @annotation test a b c*/');
 
         $actual = $parser->getFoundAnnotationDefinitions();
@@ -23,7 +26,8 @@ class ParserTest extends TestCase {
         $this->assertEquals($expected, $actual);
     }
 
-    public function testParseCommentWithSingleAnnotationWithoutValueReturnAnnotationDefinitionArray() {
+    public function testParseCommentWithSingleAnnotationWithoutValueReturnAnnotationDefinitionArray()
+    {
         $parser = new Parser('/** Test
                 * @annotationB
                 */');
@@ -32,17 +36,24 @@ class ParserTest extends TestCase {
         $this->assertEquals($expected, $actual);
     }
 
-    public function testParseCommentWithTwoSameAnnotationsWithoutValueReturnAnnotationDefinitionArray() {
+    public function testParseCommentWithTwoSameAnnotationsWithoutValueReturnAnnotationDefinitionArray()
+    {
         $parser = new Parser('/** Test
                 * @annotationB
                 * @annotationB
                 */');
         $actual = $parser->getFoundAnnotationDefinitions();
-        $expected = array('annotationB' => array(new AnnotationDefinition('annotationB'), new AnnotationDefinition('annotationB')));
+        $expected = array(
+            'annotationB' => array(
+                new AnnotationDefinition('annotationB'),
+                new AnnotationDefinition('annotationB')
+            )
+        );
         $this->assertEquals($expected, $actual);
     }
 
-    public function testParseCommentWithSingleAnnotationWithValuesReturnAnnotationDefinitionArray() {
+    public function testParseCommentWithSingleAnnotationWithValuesReturnAnnotationDefinitionArray()
+    {
         $parser = new Parser('/** Test
                 * @annotationB value1 value2 value3
                 */');
@@ -51,7 +62,8 @@ class ParserTest extends TestCase {
         $this->assertEquals($expected, $actual);
     }
 
-    public function testParseCommentWithTwoSameAnnotationsWithValuesReturnAnnotationDefinitionArray() {
+    public function testParseCommentWithTwoSameAnnotationsWithValuesReturnAnnotationDefinitionArray()
+    {
         $parser = new Parser('/** Test
                 * @annotationB value1 value2 value3
                 * @annotationB value4 value5 value6
@@ -64,7 +76,8 @@ class ParserTest extends TestCase {
         $this->assertEquals($expected, $actual);
     }
 
-    public function testParseCommentWithAnnotationWithBracketValueReturnAnnotationDefinitionArray() {
+    public function testParseCommentWithAnnotationWithBracketValueReturnAnnotationDefinitionArray()
+    {
         $parser = new Parser('/** Test
                 * @annotationB {value1,value2}
                 */');
@@ -75,7 +88,9 @@ class ParserTest extends TestCase {
         $this->assertEquals($expected, $actual);
     }
 
-    public function testParseCommentWithAnnotationWithMultilineValueSurroundedByParenthesesReturnAnnotationDefinitionArray() {
+    public function testParseCommentWithAnnotationWithMultilineValueSurroundedByParenthesesReturnAnnotationDefinitionArray(
+    )
+    {
         $parser = new Parser('/** Test
                 * @annotationB("aaa
                 * @someannot )
@@ -89,7 +104,8 @@ class ParserTest extends TestCase {
     /**
      * @group debug
      */
-    public function testParseCommentWithAnnotationWithValueSurroundedByParenthesesReturnAnnotationDefinitionArray() {
+    public function testParseCommentWithAnnotationWithValueSurroundedByParenthesesReturnAnnotationDefinitionArray()
+    {
         $parser = new Parser('/** Test
                 * @annotationB(aaa)
                 */');
@@ -99,7 +115,8 @@ class ParserTest extends TestCase {
         $this->assertEquals($expected, $actual);
     }
 
-    public function testParseCommentWithAnnotationWithValueContainingArobaseReturnAnnotationDefinitionArray() {
+    public function testParseCommentWithAnnotationWithValueContainingArobaseReturnAnnotationDefinitionArray()
+    {
         $parser = new Parser('/** Test
                 * @annotationB @annotation
                 */');
@@ -109,7 +126,8 @@ class ParserTest extends TestCase {
         $this->assertEquals($expected, $actual);
     }
 
-    public function testParseCommentWithAnnotationWithNestedArrayValueReturnAnnotationDefinitionArray() {
+    public function testParseCommentWithAnnotationWithNestedArrayValueReturnAnnotationDefinitionArray()
+    {
         $parser = new Parser('/** Test
                 * @annotationB(a(b))
                 */');
@@ -122,7 +140,8 @@ class ParserTest extends TestCase {
     /**
      * @expectedException \Wingu\OctopusCore\Reflection\Annotation\Exceptions\RuntimeException
      */
-    public function testParseCommentWithAnnotationWithMultiLineValueNotCloseNestedArrayThrowsRuntimeException() {
+    public function testParseCommentWithAnnotationWithMultiLineValueNotCloseNestedArrayThrowsRuntimeException()
+    {
         $parser = new Parser('/** Test
                 * @annotationB(a b
                 * c d e f
@@ -130,7 +149,8 @@ class ParserTest extends TestCase {
         $parser->getFoundAnnotationDefinitions();
     }
 
-    public function testParseCommentWithAnnotationWithDoubleArobaseAndValueReturnEmptyArray() {
+    public function testParseCommentWithAnnotationWithDoubleArobaseAndValueReturnEmptyArray()
+    {
         $parser = new Parser('/** Test
                 * @@annotationB dd gg
                 */');

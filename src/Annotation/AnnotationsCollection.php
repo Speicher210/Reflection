@@ -5,7 +5,8 @@ namespace Wingu\OctopusCore\Reflection\Annotation;
 /**
  * A collection of parsed types.
  */
-class AnnotationsCollection {
+class AnnotationsCollection
+{
 
     /**
      * The parsed annotations definitions.
@@ -26,7 +27,8 @@ class AnnotationsCollection {
      *
      * @param string $comment The comment string from which to extract the annotations.
      */
-    public function __construct($comment) {
+    public function __construct($comment)
+    {
         $parser = new Parser($comment);
         $this->annotationsDefinitions = $parser->getFoundAnnotationDefinitions();
     }
@@ -37,8 +39,10 @@ class AnnotationsCollection {
      * @param \Wingu\OctopusCore\Reflection\Annotation\TagMapper $tm The tag mapper to set.
      * @return \Wingu\OctopusCore\Reflection\Annotation\AnnotationsCollection
      */
-    public function setTagMapper(TagMapper $tm) {
+    public function setTagMapper(TagMapper $tm)
+    {
         $this->tagsMapper = $tm;
+
         return $this;
     }
 
@@ -47,7 +51,8 @@ class AnnotationsCollection {
      *
      * @return \Wingu\OctopusCore\Reflection\Annotation\TagMapper
      */
-    public function getTagMapper() {
+    public function getTagMapper()
+    {
         return $this->tagsMapper;
     }
 
@@ -57,7 +62,8 @@ class AnnotationsCollection {
      * @param string $tag The annotation tag name to check.
      * @return boolean
      */
-    public function hasAnnotationTag($tag) {
+    public function hasAnnotationTag($tag)
+    {
         return isset($this->annotationsDefinitions[$tag]);
     }
 
@@ -66,7 +72,8 @@ class AnnotationsCollection {
      *
      * @return \Wingu\OctopusCore\Reflection\Annotation\Tags\TagInterface[]
      */
-    public function getAnnotations() {
+    public function getAnnotations()
+    {
         $result = array();
         foreach ($this->annotationsDefinitions as $annotationDefinition) {
             $result = array_merge($result, $this->buildAnnotationsInstances($annotationDefinition));
@@ -82,7 +89,8 @@ class AnnotationsCollection {
      * @return \Wingu\OctopusCore\Reflection\Annotation\Tags\TagInterface[]
      * @throws \Wingu\OctopusCore\Reflection\Annotation\Exceptions\OutOfBoundsException If there are no annotations with the specified tag.
      */
-    public function getAnnotation($tag) {
+    public function getAnnotation($tag)
+    {
         if ($this->hasAnnotationTag($tag) === true) {
             $result = array();
             foreach ($this->annotationsDefinitions[$tag] as $annotationDefinition) {
@@ -91,7 +99,7 @@ class AnnotationsCollection {
 
             return $result;
         } else {
-            throw new Exceptions\OutOfBoundsException('No annotations with the tag "'.$tag.'" were found.');
+            throw new Exceptions\OutOfBoundsException('No annotations with the tag "' . $tag . '" were found.');
         }
     }
 
@@ -101,7 +109,8 @@ class AnnotationsCollection {
      * @param string $tag The annotation tag name.
      * @return string
      */
-    protected function getAnnotationClass($tag) {
+    protected function getAnnotationClass($tag)
+    {
         if ($this->tagsMapper !== null && $this->tagsMapper->hasMappedTag($tag) === true) {
             return $this->tagsMapper->getMappedTag($tag);
         } elseif (class_exists(__NAMESPACE__ . '\Tags\\' . ucfirst($tag) . 'Tag') === true) {
@@ -117,7 +126,8 @@ class AnnotationsCollection {
      * @param \Wingu\OctopusCore\Reflection\Annotation\AnnotationDefinition[] $annotationDefinitions The annotation tag name.
      * @return \Wingu\OctopusCore\Reflection\Annotation\Tags\TagInterface[]
      */
-    protected function buildAnnotationsInstances(array $annotationDefinitions) {
+    protected function buildAnnotationsInstances(array $annotationDefinitions)
+    {
         $result = array();
         foreach ($annotationDefinitions as $annotationDefinition) {
             $result[] = $this->buildAnnotationInstance($annotationDefinition);
@@ -132,7 +142,8 @@ class AnnotationsCollection {
      * @param \Wingu\OctopusCore\Reflection\Annotation\AnnotationDefinition $annotationDefinition The annotation definition.
      * @return \Wingu\OctopusCore\Reflection\Annotation\Tags\TagInterface
      */
-    protected function buildAnnotationInstance(AnnotationDefinition $annotationDefinition) {
+    protected function buildAnnotationInstance(AnnotationDefinition $annotationDefinition)
+    {
         $class = $this->getAnnotationClass($annotationDefinition->getTag());
         $annotation = new $class($annotationDefinition);
 

@@ -2,12 +2,13 @@
 
 namespace Wingu\OctopusCore\Reflection\Annotation\Tags;
 
-use \Wingu\OctopusCore\Reflection\Annotation\AnnotationDefinition;
+use Wingu\OctopusCore\Reflection\Annotation\AnnotationDefinition;
 
 /**
  * Base class for annotations tags.
  */
-class BaseTag implements TagInterface {
+class BaseTag implements TagInterface
+{
 
     /**
      * The annotation definition.
@@ -35,7 +36,8 @@ class BaseTag implements TagInterface {
      *
      * @param \Wingu\OctopusCore\Reflection\Annotation\AnnotationDefinition $definition The annotation definition.
      */
-    public function __construct(AnnotationDefinition $definition) {
+    public function __construct(AnnotationDefinition $definition)
+    {
         $this->definition = $definition;
         $this->initTag();
     }
@@ -43,7 +45,8 @@ class BaseTag implements TagInterface {
     /**
      * Initialize the annotation tag.
      */
-    protected function initTag() {
+    protected function initTag()
+    {
         $this->tagName = $this->definition->getTag();
 
         $description = trim($this->definition->getDescription());
@@ -57,7 +60,8 @@ class BaseTag implements TagInterface {
      *
      * @return string
      */
-    public function getTagName() {
+    public function getTagName()
+    {
         return $this->tagName;
     }
 
@@ -66,7 +70,8 @@ class BaseTag implements TagInterface {
      *
      * @return string
      */
-    public function getDescription() {
+    public function getDescription()
+    {
         return $this->description;
     }
 }

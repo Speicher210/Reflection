@@ -9,7 +9,8 @@ use Wingu\OctopusCore\Reflection\Annotation\Exceptions\RuntimeException;
 /**
  * Annotation for "@param" annotation tag.
  */
-class ParamTag extends BaseTag {
+class ParamTag extends BaseTag
+{
 
     /**
      * The parameter type.
@@ -38,7 +39,8 @@ class ParamTag extends BaseTag {
      * @param \Wingu\OctopusCore\Reflection\Annotation\AnnotationDefinition $definition The annotation definition.
      * @throws \Wingu\OctopusCore\Reflection\Annotation\Exceptions\InvalidArgumentException If the definition is not valid.
      */
-    public function __construct(AnnotationDefinition $definition) {
+    public function __construct(AnnotationDefinition $definition)
+    {
         if ($definition->getTag() !== 'param') {
             throw new InvalidArgumentException('The definition tag must be "param".');
         }
@@ -49,7 +51,8 @@ class ParamTag extends BaseTag {
     /**
      * Initialize the annotation tag.
      */
-    protected function initTag() {
+    protected function initTag()
+    {
         parent::initTag();
 
         $value = preg_split('/[\s]+/', $this->description, 3);
@@ -74,7 +77,8 @@ class ParamTag extends BaseTag {
      *
      * @return string
      */
-    public function getParamType() {
+    public function getParamType()
+    {
         return $this->paramType;
     }
 
@@ -83,7 +87,8 @@ class ParamTag extends BaseTag {
      *
      * @return string
      */
-    public function getParamName() {
+    public function getParamName()
+    {
         return $this->paramName;
     }
 
@@ -92,7 +97,8 @@ class ParamTag extends BaseTag {
      *
      * @return string
      */
-    public function getParamDescription() {
+    public function getParamDescription()
+    {
         return $this->paramDescription;
     }
 }

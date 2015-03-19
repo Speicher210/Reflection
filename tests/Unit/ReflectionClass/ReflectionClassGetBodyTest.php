@@ -2,13 +2,16 @@
 
 namespace Wingu\OctopusCore\Reflection\Tests\Unit\ReflectionClass;
 
-use Wingu\OctopusCore\Reflection\Tests\Unit\TestCase;
 use Wingu\OctopusCore\Reflection\ReflectionClass;
+use Wingu\OctopusCore\Reflection\Tests\Unit\TestCase;
 
-class ReflectionClassGetBodyTest extends TestCase {
+class ReflectionClassGetBodyTest extends TestCase
+{
 
-    public function getDataGetBody() {
+    public function getDataGetBody()
+    {
         require_once(__DIR__ . '/../Fixtures/ReflectionClassGetBody.php');
+
         return array(
             ['ReflectionClassGetBody1', '    public $property;'],
             ['ReflectionClassGetBody2', 'public $property;'],
@@ -20,16 +23,18 @@ class ReflectionClassGetBodyTest extends TestCase {
     /**
      * @dataProvider getDataGetBody
      */
-    public function testGetBody($class, $expected) {
-    	$reflection = new ReflectionClass('Wingu\OctopusCore\Reflection\Tests\Unit\Fixtures\\'.$class);
-    	$this->assertSame($expected, $reflection->getBody());
+    public function testGetBody($class, $expected)
+    {
+        $reflection = new ReflectionClass('Wingu\OctopusCore\Reflection\Tests\Unit\Fixtures\\' . $class);
+        $this->assertSame($expected, $reflection->getBody());
     }
 
     /**
      * @expectedException \Wingu\OctopusCore\Reflection\Exceptions\RuntimeException
      */
-    public function testGetBodyInternalClass() {
-    	$reflection = new ReflectionClass('ReflectionClass');
-    	$reflection->getBody();
+    public function testGetBodyInternalClass()
+    {
+        $reflection = new ReflectionClass('ReflectionClass');
+        $reflection->getBody();
     }
 }

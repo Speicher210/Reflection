@@ -5,5 +5,6 @@ namespace Wingu\OctopusCore\Reflection\Annotation\Exceptions;
 /**
  * Exception thrown if a value is not a valid key.
  */
-class OutOfBoundsException extends \OutOfBoundsException implements Exception {
+class OutOfBoundsException extends \OutOfBoundsException implements Exception
+{
 }

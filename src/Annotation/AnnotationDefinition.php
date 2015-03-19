@@ -5,7 +5,8 @@ namespace Wingu\OctopusCore\Reflection\Annotation;
 /**
  * Class that holds the raw output of the annotation parser for one annotation.
  */
-class AnnotationDefinition {
+class AnnotationDefinition
+{
 
     /**
      * The tag name of the annotation.
@@ -27,10 +28,11 @@ class AnnotationDefinition {
      * @param string $tag The tag name for the annotation.
      * @param string $description The annotation description.
      */
-    public function __construct($tag, $description = null) {
-        $this->tag = (string) $tag;
+    public function __construct($tag, $description = null)
+    {
+        $this->tag = (string)$tag;
 
-        $description = trim((string) $description);
+        $description = trim((string)$description);
         if ($description !== '') {
             $this->description = $description;
         }
@@ -41,7 +43,8 @@ class AnnotationDefinition {
      *
      * @return string
      */
-    public function getTag() {
+    public function getTag()
+    {
         return $this->tag;
     }
 
@@ -50,7 +53,8 @@ class AnnotationDefinition {
      *
      * @return string
      */
-    public function getDescription() {
+    public function getDescription()
+    {
         return $this->description;
     }
 }

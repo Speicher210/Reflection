@@ -2,5 +2,9 @@
 
 namespace Wingu\OctopusCore\Reflection\Tests\Unit;
 
-abstract class TestCase extends \Wingu\OctopusCore\Reflection\Tests\TestCase {
+/**
+ * Base test case for unit tests.
+ */
+abstract class TestCase extends \Wingu\OctopusCore\Reflection\Tests\TestCase
+{
 }

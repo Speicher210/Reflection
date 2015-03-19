@@ -5,7 +5,8 @@ namespace Wingu\OctopusCore\Reflection;
 /**
  * Reflection about a class constant.
  */
-class ReflectionConstant implements \Reflector {
+class ReflectionConstant implements \Reflector
+{
 
     use ReflectionDocCommentTrait;
 
@@ -36,7 +37,8 @@ class ReflectionConstant implements \Reflector {
      * @param string $class The name of the class where the constant has been declared.
      * @param string $name The name of the constant to reflect.
      */
-    public function __construct($class, $name) {
+    public function __construct($class, $name)
+    {
         $this->declaringClass = new ReflectionClass($class);
         $this->name = $name;
         $this->value = $this->declaringClass->getConstant($name);
@@ -47,7 +49,8 @@ class ReflectionConstant implements \Reflector {
      *
      * @return \Wingu\OctopusCore\Reflection\ReflectionClass
      */
-    public function getDeclaringClass() {
+    public function getDeclaringClass()
+    {
         return $this->declaringClass;
     }
 
@@ -56,7 +59,8 @@ class ReflectionConstant implements \Reflector {
      *
      * @return mixed
      */
-    public function getValue() {
+    public function getValue()
+    {
         return $this->value;
     }
 
@@ -65,7 +69,8 @@ class ReflectionConstant implements \Reflector {
      *
      * @return string
      */
-    public function getName() {
+    public function getName()
+    {
         return $this->name;
     }
 
@@ -77,13 +82,15 @@ class ReflectionConstant implements \Reflector {
      * @param boolean $return Flag if the export should be returned or not.
      * @return string
      */
-    public static function export($className, $constantName, $return = false) {
+    public static function export($className, $constantName, $return = false)
+    {
         $export = new self($className, $constantName);
-        $export = (string) $export;
+        $export = (string)$export;
         if ($return === true) {
             return $export;
         } else {
             echo $export;
+
             return null;
         }
     }
@@ -93,7 +100,8 @@ class ReflectionConstant implements \Reflector {
      *
      * @return string
      */
-    public function __toString() {
+    public function __toString()
+    {
         return 'Constant [ ' . gettype($this->value) . ' const ' . $this->getName() . ' ] { ' . $this->value . ' }';
     }
 
@@ -102,7 +110,8 @@ class ReflectionConstant implements \Reflector {
      *
      * @return string
      */
-    public function getDocComment() {
+    public function getDocComment()
+    {
         $fileName = $this->getDeclaringClass()->getFileName();
         if ($fileName === false) {
             return false;
@@ -117,7 +126,8 @@ class ReflectionConstant implements \Reflector {
      * @param string $fileName an existing filename
      * @return string
      */
-    private function getDocCommentFromFile($fileName) {
+    private function getDocCommentFromFile($fileName)
+    {
         $lines = file($fileName, FILE_IGNORE_NEW_LINES);
 
         $declaringClassStartLine = $this->getDeclaringClass()->getStartLine() - 1;
@@ -150,7 +160,8 @@ class ReflectionConstant implements \Reflector {
      * @param array $tokens the array of tokens (see http://www.php.net/manual/en/ref.tokenizer.php)
      * @return int
      */
-    private function getCurrentConstantKeyFromClassTokens($tokens) {
+    private function getCurrentConstantKeyFromClassTokens($tokens)
+    {
         $parsingStateConstDeclarationFound = false;
         $constDeclarationKey = 0;
 

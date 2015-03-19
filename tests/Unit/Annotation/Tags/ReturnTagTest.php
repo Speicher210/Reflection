@@ -2,12 +2,14 @@
 
 namespace Wingu\OctopusCore\Reflection\Tests\Unit\Annotation\Tags;
 
-use Wingu\OctopusCore\Reflection\Tests\Unit\TestCase;
 use Wingu\OctopusCore\Reflection\Annotation\Tags\ReturnTag;
+use Wingu\OctopusCore\Reflection\Tests\Unit\TestCase;
 
-class ReturnTagTest extends TestCase {
+class ReturnTagTest extends TestCase
+{
 
-    public function getDataForAnnotationDefinition() {
+    public function getDataForAnnotationDefinition()
+    {
         return array(
             [null, null, null],
             ['', null, null],
@@ -26,8 +28,10 @@ class ReturnTagTest extends TestCase {
     /**
      * @dataProvider getDataForAnnotationDefinition
      */
-    public function testReturnTag($description, $expectedReturnType, $expectedReturnDescription) {
-        $ad = $this->getMock('Wingu\OctopusCore\Reflection\Annotation\AnnotationDefinition', ['getTag', 'getDescription'], ['']);
+    public function testReturnTag($description, $expectedReturnType, $expectedReturnDescription)
+    {
+        $ad = $this->getMock('Wingu\OctopusCore\Reflection\Annotation\AnnotationDefinition',
+            ['getTag', 'getDescription'], ['']);
         $ad->expects($this->any())
             ->method('getTag')
             ->will($this->returnValue('return'));
@@ -45,7 +49,8 @@ class ReturnTagTest extends TestCase {
     /**
      * @expectedException \Wingu\OctopusCore\Reflection\Annotation\Exceptions\InvalidArgumentException
      */
-    public function testReturnTagWrongAnnotationDefinition() {
+    public function testReturnTagWrongAnnotationDefinition()
+    {
         $ad = $this->getMock('Wingu\OctopusCore\Reflection\Annotation\AnnotationDefinition', ['getTag'], ['']);
         $ad->expects($this->any())
             ->method('getTag')

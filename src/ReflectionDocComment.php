@@ -7,7 +7,8 @@ use Wingu\OctopusCore\Reflection\Annotation\AnnotationsCollection;
 /**
  * Reflection on a document block.
  */
-class ReflectionDocComment {
+class ReflectionDocComment
+{
 
     /**
      * The original document block that was parsed.
@@ -35,8 +36,9 @@ class ReflectionDocComment {
      *
      * @param string $comment The original document block comment.
      */
-    public function __construct($comment) {
-        $this->originalDocBlock = trim((string) $comment);
+    public function __construct($comment)
+    {
+        $this->originalDocBlock = trim((string)$comment);
 
         $comment = preg_replace('#^\s*\*\s?#ms', '', trim($this->originalDocBlock, '/*'));
         $comment = preg_split('#^\s*(?=@[_a-zA-Z\x7F-\xFF][_a-zA-Z0-9\x7F-\xFF-]*)#m', $comment, 2);
@@ -68,7 +70,8 @@ class ReflectionDocComment {
      *
      * @return string
      */
-    public function getFullDescription() {
+    public function getFullDescription()
+    {
         if ($this->longDescription !== null) {
             return $this->shortDescription . "\n\n" . $this->longDescription;
         } else {
@@ -81,7 +84,8 @@ class ReflectionDocComment {
      *
      * @return string
      */
-    public function getShortDescription() {
+    public function getShortDescription()
+    {
         return $this->shortDescription;
     }
 
@@ -90,7 +94,8 @@ class ReflectionDocComment {
      *
      * @return string
      */
-    public function getLongDescription() {
+    public function getLongDescription()
+    {
         return $this->longDescription;
     }
 
@@ -99,7 +104,8 @@ class ReflectionDocComment {
      *
      * @return \Wingu\OctopusCore\Reflection\Annotation\AnnotationsCollection
      */
-    public function getAnnotationsCollection() {
+    public function getAnnotationsCollection()
+    {
         return new AnnotationsCollection($this->originalDocBlock);
     }
 
@@ -108,7 +114,8 @@ class ReflectionDocComment {
      *
      * @return string
      */
-    public function getOriginalDocBlock() {
+    public function getOriginalDocBlock()
+    {
         return $this->originalDocBlock;
     }
 
@@ -117,7 +124,8 @@ class ReflectionDocComment {
      *
      * @return boolean
      */
-    public function isEmpty() {
+    public function isEmpty()
+    {
         return $this->originalDocBlock === '';
     }
 
@@ -126,7 +134,8 @@ class ReflectionDocComment {
      *
      * @return string
      */
-    public function __toString() {
+    public function __toString()
+    {
         return $this->originalDocBlock;
     }
 }
