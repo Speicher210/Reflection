@@ -3,8 +3,10 @@
 ## 1.0.4 - 2015-03-19
 
 ### Added
-- Use PSR-4
 - Project structure refactoring
+- Use PSR-2 & PSR-4
+- Small code improvements
+- Cleanup
 
 ## 1.0.3 - 2014-11-27
 
