@@ -26,4 +26,11 @@ trait ReflectionDocCommentTrait {
 
         return $this->reflectionDocComment;
     }
+
+    /**
+     * Return the string containing the current constant comment or false if there's no comment.
+     *
+     * @return string|false
+     */
+    abstract public function getDocComment();
 }
