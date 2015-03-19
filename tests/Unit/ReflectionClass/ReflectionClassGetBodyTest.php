@@ -8,7 +8,7 @@ use Wingu\OctopusCore\Reflection\ReflectionClass;
 class ReflectionClassGetBodyTest extends TestCase {
 
     public function getDataGetBody() {
-        require_once (__DIR__ . '/../Fixtures/ReflectionClassGetBody.php');
+        require_once(__DIR__ . '/../Fixtures/ReflectionClassGetBody.php');
         return array(
             ['ReflectionClassGetBody1', '    public $property;'],
             ['ReflectionClassGetBody2', 'public $property;'],

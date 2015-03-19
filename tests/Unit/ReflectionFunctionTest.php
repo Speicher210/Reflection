@@ -6,7 +6,7 @@ use Wingu\OctopusCore\Reflection\ReflectionExtension;
 use Wingu\OctopusCore\Reflection\ReflectionParameter;
 use Wingu\OctopusCore\Reflection\ReflectionFunction;
 
-require_once(__DIR__.'/Fixtures/functions.php');
+require_once(__DIR__ . '/Fixtures/functions.php');
 
 class ReflectionFunctionTest extends TestCase {
 

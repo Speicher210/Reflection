@@ -1,2 +1,5 @@
+.idea/
 vendor/
+build/
+docs/
 composer.lock
