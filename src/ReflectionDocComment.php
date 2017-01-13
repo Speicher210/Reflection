@@ -47,9 +47,9 @@ class ReflectionDocComment
         if (isset($comment[0]) === true) {
             $description = $comment[0];
             $description = preg_split("/\n|\n\r/", $description);
-            array_walk($description, function (& $value) {
+            array_walk($description, function (& $value, $key, $trimLinePattern) {
                 $value = trim($value, $trimLinePattern);
-            });
+            }, $trimLinePattern);
 
             foreach ($description as $key => $descLine) {
                 if ($descLine !== '') {
