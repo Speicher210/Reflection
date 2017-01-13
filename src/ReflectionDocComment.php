@@ -35,8 +35,9 @@ class ReflectionDocComment
      * Constructor.
      *
      * @param string $comment The original document block comment.
+     * @param string $trimLinePattern Pattern for trim() function applied to each line. Usefull to leave spaces or tabs. The default is the same as calling trim() without the argument.
      */
-    public function __construct($comment)
+    public function __construct($comment, $trimLinePattern = " \t\n\r\0\x0B")
     {
         $this->originalDocBlock = trim((string)$comment);
 
@@ -47,7 +48,7 @@ class ReflectionDocComment
             $description = $comment[0];
             $description = preg_split("/\n|\n\r/", $description);
             array_walk($description, function (& $value) {
-                $value = trim($value);
+                $value = trim($value, $trimLinePattern);
             });
 
             foreach ($description as $key => $descLine) {
