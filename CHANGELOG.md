@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.0.5 - 2017-02-15
+
+### Changed
+- Custom trim patterns for getting the doc comments
+
 ## 1.0.4 - 2015-03-19
 
 ### Added
