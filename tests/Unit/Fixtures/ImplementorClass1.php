@@ -12,8 +12,6 @@ class ImplementorClass1 implements Interface1, Interface3 {
      * This is *another comment*
      */
     const CONSTANT3 = 'VALUE1_WITH_COMMENTS';
-    
-    const CONSTANT4 = 'VALUE4';
 
     public function method1() {
     }
