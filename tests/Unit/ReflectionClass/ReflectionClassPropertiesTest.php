@@ -123,20 +123,24 @@ class ReflectionClassPropertiesTest extends TestCase
     {
         $reflection = new ReflectionClass('\Wingu\OctopusCore\Reflection\Tests\Unit\Fixtures\ImplementorClass2');
         $actual = $reflection->getConstants();
-        $expected = new ReflectionConstant('\Wingu\OctopusCore\Reflection\Tests\Unit\Fixtures\ImplementorClass2',
+        $expected1 = new ReflectionConstant('\Wingu\OctopusCore\Reflection\Tests\Unit\Fixtures\ImplementorClass2',
             'CONSTANT1');
-        $this->assertEquals(array('CONSTANT1' => $expected), $actual);
+        $expected2 = new ReflectionConstant('\Wingu\OctopusCore\Reflection\Tests\Unit\Fixtures\ImplementorClass2',
+            'CONSTANT3');
+        $this->assertEquals(array('CONSTANT1' => $expected1, 'CONSTANT3' => $expected2), $actual);
     }
 
     public function testGetConstantsWithConstantReturnReflectionConstantArray()
     {
         $reflection = new ReflectionClass('\Wingu\OctopusCore\Reflection\Tests\Unit\Fixtures\ImplementorClass3');
         $actual = $reflection->getConstants();
+        $expectedConstant3 = new ReflectionConstant('\Wingu\OctopusCore\Reflection\Tests\Unit\Fixtures\ImplementorClass3',
+            'CONSTANT3');
         $expectedConstant2 = new ReflectionConstant('\Wingu\OctopusCore\Reflection\Tests\Unit\Fixtures\ImplementorClass3',
             'CONSTANT2');
         $expectedConstant1 = new ReflectionConstant('\Wingu\OctopusCore\Reflection\Tests\Unit\Fixtures\ImplementorClass3',
             'CONSTANT1');
-        $expected = array('CONSTANT2' => $expectedConstant2, 'CONSTANT1' => $expectedConstant1);
+        $expected = array('CONSTANT2' => $expectedConstant2, 'CONSTANT1' => $expectedConstant1, 'CONSTANT3' => $expectedConstant3);
         $this->assertEquals($expected, $actual);
     }
 

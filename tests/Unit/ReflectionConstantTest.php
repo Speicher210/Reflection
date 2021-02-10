@@ -60,6 +60,19 @@ class ReflectionConstantTest extends TestCase
      */';
         $this->assertEquals($expected, $actual);
     }
+    
+    public function testGetDocCommentWithValidCommentInheritedReturnTheDocComment()
+    {
+        $reflectionConstant = new ReflectionConstant(
+            'Wingu\OctopusCore\Reflection\Tests\Unit\Fixtures\ImplementorClass3',
+            'CONSTANT3'
+            );
+        $actual = $reflectionConstant->getDocComment();
+        $expected = '/**
+     * This is *another comment*
+     */';
+        $this->assertEquals($expected, $actual);
+    }
 
     public function testGetDocCommentFromBuiltInClassReturnFalse()
     {

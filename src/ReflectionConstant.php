@@ -32,6 +32,13 @@ class ReflectionConstant implements \Reflector
     protected $declaringClass;
 
     /**
+     * The class where the constant was reflected from (the one passed to the consturctor)
+     *
+     * @var \Wingu\OctopusCore\Reflection\ReflectionClass
+     */
+    protected $reflectedClass;
+    
+    /**
      * Constructor.
      *
      * @param string $class The name of the class where the constant has been declared.
@@ -39,9 +46,9 @@ class ReflectionConstant implements \Reflector
      */
     public function __construct($class, $name)
     {
-        $this->declaringClass = new ReflectionClass($class);
+        $this->reflectedClass = new ReflectionClass($class);
         $this->name = $name;
-        $this->value = $this->declaringClass->getConstant($name);
+        $this->value = $this->reflectedClass->getConstant($name);
     }
 
     /**
@@ -51,6 +58,19 @@ class ReflectionConstant implements \Reflector
      */
     public function getDeclaringClass()
     {
+        if ($this->declaringClass === null) {
+            $reflectionClass = $this->reflectedClass;
+            $name = $this->getName();
+            while ($reflectionClass) {
+                foreach ($reflectionClass->getOwnConstants() as $ownConstant) {
+                    if ($ownConstant->getName() === $name) {
+                        break 2;
+                    }
+                }
+                $reflectionClass = $reflectionClass->getParentClass();
+            }
+            $this->declaringClass = $reflectionClass ? $reflectionClass : $this->reflectedClass;
+        }
         return $this->declaringClass;
     }
 
@@ -176,6 +196,7 @@ class ReflectionConstant implements \Reflector
                     break;
                 } else {
                     $parsingStateConstDeclarationFound = false;
+                    $constDeclarationKey = 0;
                 }
             }
         }
