@@ -229,12 +229,11 @@ class ReflectionClass extends \ReflectionClass
     /**
      * Get the constants that are defined in the class
      *
-     * @param integer|null $filter Filter for the constants.
      * @return \Wingu\OctopusCore\Reflection\ReflectionConstant[] the array of constants
      */
     public function getConstants($filter = null)
     {
-        $constants = parent::getConstants($filter);
+        $constants = parent::getConstants();
         $returnConstants = array();
         foreach ($constants as $key => $value) {
             $returnConstants[$key] = new ReflectionConstant($this->getName(), $key);
