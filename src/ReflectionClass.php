@@ -231,7 +231,7 @@ class ReflectionClass extends \ReflectionClass
      *
      * @return \Wingu\OctopusCore\Reflection\ReflectionConstant[] the array of constants
      */
-    public function getConstants()
+    public function getConstants($filter = null)
     {
         $constants = parent::getConstants();
         $returnConstants = array();
