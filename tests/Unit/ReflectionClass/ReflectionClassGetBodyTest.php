@@ -29,11 +29,9 @@ class ReflectionClassGetBodyTest extends TestCase
         $this->assertSame($expected, $reflection->getBody());
     }
 
-    /**
-     * @expectedException \Wingu\OctopusCore\Reflection\Exceptions\RuntimeException
-     */
     public function testGetBodyInternalClass()
     {
+        $this->expectException('\Wingu\OctopusCore\Reflection\Exceptions\RuntimeException');
         $reflection = new ReflectionClass('ReflectionClass');
         $reflection->getBody();
     }

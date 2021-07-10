@@ -28,8 +28,11 @@ class VarTagTest extends TestCase
      */
     public function testVarTag($description, $expectedVarType)
     {
-        $ad = $this->getMock('Wingu\OctopusCore\Reflection\Annotation\AnnotationDefinition',
-            ['getTag', 'getDescription'], ['']);
+        $ad = $this->getMockBuilder('Wingu\OctopusCore\Reflection\Annotation\AnnotationDefinition')
+            ->setMethods(['getTag', 'getDescription'])
+            ->setConstructorArgs([''])
+            ->getMock()
+        ;
         $ad->expects($this->any())
             ->method('getTag')
             ->will($this->returnValue('var'));
@@ -43,12 +46,14 @@ class VarTagTest extends TestCase
         $this->assertSame($expectedVarType, $returnTag->getVarType());
     }
 
-    /**
-     * @expectedException \Wingu\OctopusCore\Reflection\Annotation\Exceptions\InvalidArgumentException
-     */
     public function testVarTagWrongAnnotationDefinition()
     {
-        $ad = $this->getMock('Wingu\OctopusCore\Reflection\Annotation\AnnotationDefinition', ['getTag'], ['']);
+        $this->expectException('\Wingu\OctopusCore\Reflection\Annotation\Exceptions\InvalidArgumentException');
+        $ad = $this->getMockBuilder('Wingu\OctopusCore\Reflection\Annotation\AnnotationDefinition')
+            ->setMethods(['getTag'])
+            ->setConstructorArgs([''])
+            ->getMock()
+        ;
         $ad->expects($this->any())
             ->method('getTag')
             ->will($this->returnValue('wrongtag'));

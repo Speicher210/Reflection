@@ -2,10 +2,12 @@
 
 namespace Wingu\OctopusCore\Reflection\Tests;
 
+use PHPUnit\Framework\TestCase as BaseTestCase;
+
 /**
  * Base class for test cases.
  */
-abstract class TestCase extends \PHPUnit_Framework_TestCase
+abstract class TestCase extends BaseTestCase
 {
 
     /**
