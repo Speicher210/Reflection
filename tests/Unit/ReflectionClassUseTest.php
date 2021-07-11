@@ -35,8 +35,6 @@ class ReflectionClassUseTest extends TestCase
      */
     public function testGetConflictResolutions($traitName, $expected)
     {
-        $this->markTestSkipped('Do not know how to resolve it');
-
         $reflection = new ReflectionClassUse('Wingu\OctopusCore\Reflection\Tests\Unit\Fixtures\ReflectionClassUse',
             $traitName);
         $actual = $reflection->getConflictResolutions();

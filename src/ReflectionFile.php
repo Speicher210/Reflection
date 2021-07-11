@@ -92,6 +92,9 @@ class ReflectionFile
                     if (defined('T_NAME_QUALIFIED')) {
                         $tokenTypes[] = T_NAME_QUALIFIED;
                     }
+                    if (defined('T_NAME_FULLY_QUALIFIED')) {
+                        $tokenTypes[] = T_NAME_FULLY_QUALIFIED;
+                    }
                     $namespace = '\\' . ltrim($this->fetch($tokens, $tokenTypes), '\\');
                     $res[$namespace] = array();
                     $uses = array();
