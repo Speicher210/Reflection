@@ -2,7 +2,7 @@
 
 [![Latest Version](https://img.shields.io/github/tag/Speicher210/Reflection.svg?style=flat-square)](https://github.com/Speicher210/Reflection/releases)
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
-[![Build Status](https://img.shields.io/travis/Speicher210/Reflection/master.svg?style=flat-square)](https://travis-ci.org/Speicher210/Reflection)
+[![Build Status](https://github.com/Speicher210/Reflection/actions/workflows/build.yml/badge.svg)](https://github.com/Speicher210/Reflection/actions/workflows/build.yml)
 [![Coverage Status](https://img.shields.io/scrutinizer/coverage/g/Speicher210/Reflection.svg?style=flat-square)](https://scrutinizer-ci.com/g/Speicher210/Reflection/code-structure)
 [![Quality Score](https://img.shields.io/scrutinizer/g/Speicher210/reflection.svg?style=flat-square)](https://scrutinizer-ci.com/g/Speicher210/Reflection)
 [![Total Downloads](https://img.shields.io/packagist/dt/wingu/reflection.svg?style=flat-square)](https://packagist.org/packages/wingu/reflection)
