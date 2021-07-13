@@ -34,7 +34,15 @@ class ReflectionParameter extends \ReflectionParameter
      */
     public function getClass()
     {
-        $class = parent::getClass();
+        $class = null;
+        if (PHP_VERSION_ID < 80000) {
+            $class = parent::getClass();
+        } else {
+            $type = parent::getType();
+            if ($type instanceof \ReflectionNamedType && class_exists($type->getName())) {
+                $class = $type;
+            }
+        }
         if ($class !== null) {
             $class = new ReflectionClass($class->getName());
         }
