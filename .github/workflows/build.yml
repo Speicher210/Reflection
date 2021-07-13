@@ -8,7 +8,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-16.04
+    runs-on: ubuntu-20.04
     strategy:
       matrix:
         php-versions:
@@ -26,14 +26,14 @@ jobs:
       - name: Install PHP
         uses: shivammathur/setup-php@v2
         with:
-          coverage: pcov
+          coverage: xdebug
           php-version: ${{ matrix.php-versions }}
 
       - name: Install dependencies
         run: composer update --prefer-dist --no-progress --no-suggest
 
       - name: Run tests
-        run: vendor/bin/phpunit --coverage-text --coverage-clover=coverage.clover
+        run: vendor/bin/simple-phpunit --coverage-text --coverage-clover=coverage.clover
 
 #      - name: Upload code coverage
 #        run: vendor/bin/ocular code-coverage:upload --format=php-clover coverage.clover

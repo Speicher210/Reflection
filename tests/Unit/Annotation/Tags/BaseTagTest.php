@@ -23,8 +23,11 @@ class BaseTagTest extends TestCase
      */
     public function testBaseTag($tag, $description, $expectedTag, $expectedDescription)
     {
-        $ad = $this->getMock('Wingu\OctopusCore\Reflection\Annotation\AnnotationDefinition',
-            ['getTag', 'getDescription'], ['']);
+        $ad = $this->getMockBuilder('Wingu\OctopusCore\Reflection\Annotation\AnnotationDefinition')
+            ->setMethods(['getTag', 'getDescription'])
+            ->setConstructorArgs([''])
+            ->getMock()
+        ;
         $ad->expects($this->any())
             ->method('getTag')
             ->will($this->returnValue($tag));

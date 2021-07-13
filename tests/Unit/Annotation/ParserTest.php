@@ -137,11 +137,9 @@ class ParserTest extends TestCase
         $this->assertEquals($expected, $actual);
     }
 
-    /**
-     * @expectedException \Wingu\OctopusCore\Reflection\Annotation\Exceptions\RuntimeException
-     */
     public function testParseCommentWithAnnotationWithMultiLineValueNotCloseNestedArrayThrowsRuntimeException()
     {
+        $this->expectException('\Wingu\OctopusCore\Reflection\Annotation\Exceptions\RuntimeException');
         $parser = new Parser('/** Test
                 * @annotationB(a b
                 * c d e f

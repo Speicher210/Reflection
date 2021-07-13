@@ -135,8 +135,14 @@ class ReflectionClassUse implements \Reflector
 
                 continue;
             }
-
-            if (($token[0] === T_STRING || $token[0] === T_NS_SEPARATOR) === true) {
+            $tokenTypes = array(T_STRING, T_NS_SEPARATOR);
+            if (defined('T_NAME_QUALIFIED')) {
+                $tokenTypes[] = T_NAME_QUALIFIED;
+            }
+            if (defined('T_NAME_FULLY_QUALIFIED')) {
+                $tokenTypes[] = T_NAME_FULLY_QUALIFIED;
+            }
+            if (in_array($token[0], $tokenTypes, true)) {
                 $class .= $token[1];
             } else {
                 if ($token === ',') {

@@ -125,30 +125,24 @@ class ReflectionMethodTest extends TestCase
         $this->assertEquals($expected, $actual);
     }
 
-    /**
-     * @expectedException \Wingu\OctopusCore\Reflection\Exceptions\RuntimeException
-     */
     public function testGetBodyMethodFromInternalClass()
     {
+        $this->expectException('\Wingu\OctopusCore\Reflection\Exceptions\RuntimeException');
         $reflectionMethod = new ReflectionMethod('ArrayIterator', 'count');
         $reflectionMethod->getBody();
     }
 
-    /**
-     * @expectedException \Wingu\OctopusCore\Reflection\Exceptions\RuntimeException
-     */
     public function testGetBodyMethodFromAbstractClass()
     {
+        $this->expectException('\Wingu\OctopusCore\Reflection\Exceptions\RuntimeException');
         $reflectionMethod = new ReflectionMethod('Wingu\OctopusCore\Reflection\Tests\Unit\Fixtures\AbstractClass',
             'getMethodAbstract');
         $reflectionMethod->getBody();
     }
 
-    /**
-     * @expectedException \Wingu\OctopusCore\Reflection\Exceptions\RuntimeException
-     */
     public function testGetBodyMethodFromInterface()
     {
+        $this->expectException('\Wingu\OctopusCore\Reflection\Exceptions\RuntimeException');
         $reflectionMethod = new ReflectionMethod('Wingu\OctopusCore\Reflection\Tests\Unit\Fixtures\SimpleInterface',
             'simpleFunction');
         $reflectionMethod->getBody();

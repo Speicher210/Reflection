@@ -64,12 +64,10 @@ class ReflectionFunctionTest extends TestCase
         $this->assertSame($expected, $reflectionFunction->getBody());
     }
 
-    /**
-     * @expectedException \Wingu\OctopusCore\Reflection\Exceptions\RuntimeException
-     * @expectedExceptionMessage Can not get body of a function that is internal.
-     */
     public function testGetBodyInternalFunction()
     {
+        $this->expectException('\Wingu\OctopusCore\Reflection\Exceptions\RuntimeException');
+        $this->expectExceptionMessage('Can not get body of a function that is internal.');
         $reflectionFunction = new ReflectionFunction('php_sapi_name');
         $reflectionFunction->getBody();
     }

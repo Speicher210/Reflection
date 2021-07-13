@@ -30,8 +30,11 @@ class ReturnTagTest extends TestCase
      */
     public function testReturnTag($description, $expectedReturnType, $expectedReturnDescription)
     {
-        $ad = $this->getMock('Wingu\OctopusCore\Reflection\Annotation\AnnotationDefinition',
-            ['getTag', 'getDescription'], ['']);
+        $ad = $this->getMockBuilder('Wingu\OctopusCore\Reflection\Annotation\AnnotationDefinition')
+            ->setMethods(['getTag', 'getDescription'])
+            ->setConstructorArgs([''])
+            ->getMock()
+        ;
         $ad->expects($this->any())
             ->method('getTag')
             ->will($this->returnValue('return'));
@@ -46,12 +49,14 @@ class ReturnTagTest extends TestCase
         $this->assertSame($expectedReturnDescription, $returnTag->getReturnDescription());
     }
 
-    /**
-     * @expectedException \Wingu\OctopusCore\Reflection\Annotation\Exceptions\InvalidArgumentException
-     */
     public function testReturnTagWrongAnnotationDefinition()
     {
-        $ad = $this->getMock('Wingu\OctopusCore\Reflection\Annotation\AnnotationDefinition', ['getTag'], ['']);
+        $this->expectException('\Wingu\OctopusCore\Reflection\Annotation\Exceptions\InvalidArgumentException');
+        $ad = $this->getMockBuilder('Wingu\OctopusCore\Reflection\Annotation\AnnotationDefinition')
+            ->setMethods(['getTag'])
+            ->setConstructorArgs([''])
+            ->getMock()
+        ;
         $ad->expects($this->any())
             ->method('getTag')
             ->will($this->returnValue('wrongtag'));

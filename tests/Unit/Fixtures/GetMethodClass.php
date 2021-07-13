@@ -28,6 +28,6 @@ class GetMethodClass {
     final public static function getMethodPublicFinalStatic() {
     }
 
-    final private static function getMethodPrivateFinalStatic() {
+    private static function getMethodPrivateFinalStatic() {
     }
 }

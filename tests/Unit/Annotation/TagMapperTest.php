@@ -24,27 +24,25 @@ class TagMapperTest extends TestCase
     public function testMapTag($tag)
     {
         $tagMapper = new TagMapper();
-        $class = $this->getMock('\Wingu\OctopusCore\Reflection\Annotation\Tags\TagInterface');
+        $class = $this->getMockBuilder('\Wingu\OctopusCore\Reflection\Annotation\Tags\TagInterface')->getMock();
         $tagMapper->mapTag($tag, get_class($class));
         $this->assertTrue($tagMapper->hasMappedTag($tag));
     }
 
     /**
      * @dataProvider getDataMapTagExceptionsInvalidTag
-     * @expectedException \Wingu\OctopusCore\Reflection\Annotation\Exceptions\InvalidArgumentException
      */
     public function testMapTagExceptionsInvalidTag($tag)
     {
+        $this->expectException('\Wingu\OctopusCore\Reflection\Annotation\Exceptions\InvalidArgumentException');
         $tagMapper = new TagMapper();
-        $class = $this->getMock('\Wingu\OctopusCore\Reflection\Annotation\Tags\TagInterface');
+        $class = $this->getMockBuilder('\Wingu\OctopusCore\Reflection\Annotation\Tags\TagInterface')->getMock();
         $tagMapper->mapTag($tag, get_class($class));
     }
 
-    /**
-     * @expectedException \Wingu\OctopusCore\Reflection\Annotation\Exceptions\InvalidArgumentException
-     */
     public function testMapTagExceptionsInvalidClass()
     {
+        $this->expectException('\Wingu\OctopusCore\Reflection\Annotation\Exceptions\InvalidArgumentException');
         $tagMapper = new TagMapper();
         $tagMapper->mapTag('tag', 'stdClass');
     }
@@ -55,7 +53,7 @@ class TagMapperTest extends TestCase
     public function testGetMappedTags($tag)
     {
         $tagMapper = new TagMapper();
-        $class = $this->getMock('\Wingu\OctopusCore\Reflection\Annotation\Tags\TagInterface');
+        $class = $this->getMockBuilder('\Wingu\OctopusCore\Reflection\Annotation\Tags\TagInterface')->getMock();
         $tagMapper->mapTag($tag, get_class($class));
 
         $this->assertArrayHasKey($tag, $tagMapper->getMappedTags());
@@ -67,19 +65,17 @@ class TagMapperTest extends TestCase
     public function testGetMappedTag($tag)
     {
         $tagMapper = new TagMapper();
-        $class = $this->getMock('\Wingu\OctopusCore\Reflection\Annotation\Tags\TagInterface');
+        $class = $this->getMockBuilder('\Wingu\OctopusCore\Reflection\Annotation\Tags\TagInterface')->getMock();
         $tagMapper->mapTag($tag, get_class($class));
 
         $this->assertSame($tagMapper->getMappedTag($tag), get_class($class));
     }
 
-    /**
-     * @expectedException \Wingu\OctopusCore\Reflection\Annotation\Exceptions\OutOfBoundsException
-     */
     public function testGetMappedTagException()
     {
+        $this->expectException('\Wingu\OctopusCore\Reflection\Annotation\Exceptions\OutOfBoundsException');
         $tagMapper = new TagMapper();
-        $class = $this->getMock('\Wingu\OctopusCore\Reflection\Annotation\Tags\TagInterface');
+        $class = $this->getMockBuilder('\Wingu\OctopusCore\Reflection\Annotation\Tags\TagInterface')->getMock();
         $tagMapper->mapTag('tag', get_class($class));
 
         $tagMapper->getMappedTag('tag2');
@@ -87,12 +83,14 @@ class TagMapperTest extends TestCase
 
     public function testMergeTagMapperNoOverwrite()
     {
-        $tagClass1 = $this->getMock('\Wingu\OctopusCore\Reflection\Annotation\Tags\TagInterface', array(), array(),
-            'Mock_tagMapperWithOverwrite1');
+        $tagClass1 = $this->getMockBuilder('\Wingu\OctopusCore\Reflection\Annotation\Tags\TagInterface')
+            ->setMockClassName('Mock_tagMapperWithOverwrite1')->getMock()
+        ;
         $tagClass1 = get_class($tagClass1);
 
-        $tagClass2 = $this->getMock('\Wingu\OctopusCore\Reflection\Annotation\Tags\TagInterface', array(), array(),
-            'Mock_tagMapperWithOverwrite2');
+        $tagClass2 = $this->getMockBuilder('\Wingu\OctopusCore\Reflection\Annotation\Tags\TagInterface')
+            ->setMockClassName('Mock_tagMapperWithOverwrite2')->getMock()
+        ;
         $tagClass2 = get_class($tagClass2);
 
         $tagMapper1 = new TagMapper();
@@ -112,12 +110,14 @@ class TagMapperTest extends TestCase
 
     public function testMergeTagMapperWithOverwrite()
     {
-        $tagClass1 = $this->getMock('\Wingu\OctopusCore\Reflection\Annotation\Tags\TagInterface', array(), array(),
-            'Mock_tagMapperWithOverwrite1');
+        $tagClass1 = $this->getMockBuilder('\Wingu\OctopusCore\Reflection\Annotation\Tags\TagInterface')
+            ->setMockClassName('Mock_tagMapperWithOverwrite1')->getMock()
+        ;
         $tagClass1 = get_class($tagClass1);
 
-        $tagClass2 = $this->getMock('\Wingu\OctopusCore\Reflection\Annotation\Tags\TagInterface', array(), array(),
-            'Mock_tagMapperWithOverwrite2');
+        $tagClass2 = $this->getMockBuilder('\Wingu\OctopusCore\Reflection\Annotation\Tags\TagInterface')
+            ->setMockClassName('Mock_tagMapperWithOverwrite2')->getMock()
+        ;
         $tagClass2 = get_class($tagClass2);
 
         $tagMapper1 = new TagMapper();

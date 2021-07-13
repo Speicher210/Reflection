@@ -71,7 +71,8 @@ class ReflectionFile
         $classLevel = 0;
         $level = 0;
         $res = $uses = array();
-        while (list(, $token) = each($tokens)) {
+        while ($token = current($tokens)) {
+            next($tokens);
             switch (is_array($token) ? $token[0] : $token) {
                 case T_CLASS:
                 case T_INTERFACE:
@@ -87,7 +88,14 @@ class ReflectionFile
                     }
                     break;
                 case T_NAMESPACE:
-                    $namespace = '\\' . ltrim($this->fetch($tokens, array(T_STRING, T_NS_SEPARATOR)), '\\');
+                    $tokenTypes = array(T_STRING, T_NS_SEPARATOR);
+                    if (defined('T_NAME_QUALIFIED')) {
+                        $tokenTypes[] = T_NAME_QUALIFIED;
+                    }
+                    if (defined('T_NAME_FULLY_QUALIFIED')) {
+                        $tokenTypes[] = T_NAME_FULLY_QUALIFIED;
+                    }
+                    $namespace = '\\' . ltrim($this->fetch($tokens, $tokenTypes), '\\');
                     $res[$namespace] = array();
                     $uses = array();
                     break;

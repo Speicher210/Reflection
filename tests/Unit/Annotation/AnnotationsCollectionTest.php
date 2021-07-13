@@ -129,7 +129,7 @@ class AnnotationsCollectionTest extends TestCase
 
     public function testSetTagMapper()
     {
-        $tm = $this->getMock('Wingu\OctopusCore\Reflection\Annotation\TagMapper');
+        $tm = $this->getMockBuilder('\Wingu\OctopusCore\Reflection\Annotation\TagMapper')->getMock();
         $ac = new AnnotationsCollection('');
         $ac->setTagMapper($tm);
 
@@ -139,7 +139,10 @@ class AnnotationsCollectionTest extends TestCase
     public function testGetAnnotationClassWithTagMapper()
     {
         $ac = new AnnotationsCollection('');
-        $tm = $this->getMock('Wingu\OctopusCore\Reflection\Annotation\TagMapper', ['hasMappedTag', 'getMappedTag']);
+        $tm = $this->getMockBuilder('\Wingu\OctopusCore\Reflection\Annotation\TagMapper')
+            ->setMethods(['hasMappedTag', 'getMappedTag'])
+            ->getMock()
+        ;
         $tm->expects($this->any())
             ->method('hasMappedTag')
             ->will($this->returnValue(true));
@@ -187,7 +190,10 @@ class AnnotationsCollectionTest extends TestCase
     public function testGetAnnotationClassPriorityOfTagMapper($tag)
     {
         $ac = new AnnotationsCollection('');
-        $tm = $this->getMock('Wingu\OctopusCore\Reflection\Annotation\TagMapper', ['hasMappedTag', 'getMappedTag']);
+        $tm = $this->getMockBuilder('\Wingu\OctopusCore\Reflection\Annotation\TagMapper')
+            ->setMethods(['hasMappedTag', 'getMappedTag'])
+            ->getMock()
+        ;
         $tm->expects($this->any())
             ->method('hasMappedTag')
             ->will($this->returnValue(true));
@@ -239,11 +245,9 @@ class AnnotationsCollectionTest extends TestCase
         $this->assertSame($tag, $annotation[0]->getTagName());
     }
 
-    /**
-     * @expectedException \Wingu\OctopusCore\Reflection\Annotation\Exceptions\OutOfBoundsException
-     */
     public function testGetAnnotationNotFound()
     {
+        $this->expectException('\Wingu\OctopusCore\Reflection\Annotation\Exceptions\OutOfBoundsException');
         $ac = new AnnotationsCollection('');
         $ac->getAnnotation('tag');
     }
