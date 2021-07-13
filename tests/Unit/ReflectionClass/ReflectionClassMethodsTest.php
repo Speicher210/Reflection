@@ -70,7 +70,7 @@ class ReflectionClassMethodsTest extends TestCase
         $this->assertCount(3, $methodsStatic, 'Failed getting the static methods.');
 
         $methodsFinal = $reflection->getMethods(ReflectionMethod::IS_FINAL);
-        $this->assertCount(3, $methodsFinal, 'Failed getting the final methods.');
+        $this->assertCount(2, $methodsFinal, 'Failed getting the final methods.');
 
         $reflectionAbstract = new ReflectionClass('\Wingu\OctopusCore\Reflection\Tests\Unit\Fixtures\AbstractClass');
         $methodsAbstract = $reflectionAbstract->getMethods(ReflectionMethod::IS_ABSTRACT);
