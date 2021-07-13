@@ -71,9 +71,6 @@ class TagMapperTest extends TestCase
         $this->assertSame($tagMapper->getMappedTag($tag), get_class($class));
     }
 
-    /**
-     * @expectedException \Wingu\OctopusCore\Reflection\Annotation\Exceptions\OutOfBoundsException
-     */
     public function testGetMappedTagException()
     {
         $this->expectException('\Wingu\OctopusCore\Reflection\Annotation\Exceptions\OutOfBoundsException');
