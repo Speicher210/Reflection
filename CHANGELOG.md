@@ -1,9 +1,9 @@
 # Changelog
 
-## 1.0.7 - 2021-02-10
+## 1.1.0 - 2021-07-13
 
 ### Changed
-- Fixed some PHP 8.0 compatibility issues
+- PHP 8.0 compatibility
 
 ## 1.0.6 - 2021-02-10
 
