@@ -24,7 +24,7 @@ Please see [USAGE](docs/usage.md) for details.
 ## Testing
 
 ``` bash
-$ phpunit
+$ vendor/bin/simple-phpunit
 ```
 
 ## Contributing

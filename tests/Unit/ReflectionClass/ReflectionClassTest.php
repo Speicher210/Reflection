@@ -46,7 +46,7 @@ class ReflectionClassTest extends TestCase
     {
         $reflection = new ReflectionClass('\Wingu\OctopusCore\Reflection\Tests\Unit\Fixtures\TestClass3');
         $actual = $reflection->getReflectionDocComment();
-        $expected = new ReflectionDocComment("/**\n *\n * The short definition of test class 3.\n * This the long description of test class 3\n * @author test\n *\n */");
+        $expected = new ReflectionDocComment("/**\r\n *\r\n * The short definition of test class 3.\r\n * This the long description of test class 3\r\n * @author test\r\n *\r\n */");
         $this->assertEquals($expected, $actual);
     }
 }

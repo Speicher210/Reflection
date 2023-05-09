@@ -17,7 +17,7 @@ class ReflectionMethod extends \ReflectionMethod
      *
      * @return \Wingu\OctopusCore\Reflection\ReflectionClass
      */
-    public function getDeclaringClass()
+    public function getDeclaringClass(): ReflectionClass
     {
         return new ReflectionClass(parent::getDeclaringClass()->getName());
     }
@@ -27,7 +27,7 @@ class ReflectionMethod extends \ReflectionMethod
      *
      * @return \Wingu\OctopusCore\Reflection\ReflectionMethod
      */
-    public function getPrototype()
+    public function getPrototype(): ReflectionMethod
     {
         $prototype = parent::getPrototype();
 
@@ -68,7 +68,7 @@ class ReflectionMethod extends \ReflectionMethod
      *
      * @return \Wingu\OctopusCore\Reflection\ReflectionParameter[]
      */
-    public function getParameters()
+    public function getParameters(): array
     {
         $function = array($this->getDeclaringClass()->getName(), $this->getName());
         $res = parent::getParameters();
@@ -85,7 +85,7 @@ class ReflectionMethod extends \ReflectionMethod
      *
      * @return \Wingu\OctopusCore\Reflection\ReflectionExtension
      */
-    public function getExtension()
+    public function getExtension(): ?ReflectionExtension
     {
         $extensionName =  $this->getExtensionName();
         if ($extensionName !== false) {

@@ -15,7 +15,7 @@ class ReflectionProperty extends \ReflectionProperty
      *
      * @return \Wingu\OctopusCore\Reflection\ReflectionClass
      */
-    public function getDeclaringClass()
+    public function getDeclaringClass(): ReflectionClass
     {
         return new ReflectionClass(parent::getDeclaringClass()->getName());
     }
@@ -25,6 +25,7 @@ class ReflectionProperty extends \ReflectionProperty
      *
      * @return mixed
      */
+    #[\ReturnTypeWillChange]
     public function getDefaultValue()
     {
         return $this->getDeclaringClass()->getDefaultProperties()[$this->name];

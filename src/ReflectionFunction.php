@@ -42,7 +42,7 @@ class ReflectionFunction extends \ReflectionFunction
      *
      * @return \Wingu\OctopusCore\Reflection\ReflectionExtension
      */
-    public function getExtension()
+    public function getExtension(): ?ReflectionExtension
     {
         $extensionName = $this->getExtensionName();
         if ($extensionName !== false) {
@@ -57,7 +57,7 @@ class ReflectionFunction extends \ReflectionFunction
      *
      * @return \Wingu\OctopusCore\Reflection\ReflectionParameter[]
      */
-    public function getParameters()
+    public function getParameters(): array
     {
         $res = parent::getParameters();
 

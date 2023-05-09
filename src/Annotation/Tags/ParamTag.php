@@ -51,11 +51,11 @@ class ParamTag extends BaseTag
     /**
      * Initialize the annotation tag.
      */
-    protected function initTag()
+    protected function initTag(): void
     {
         parent::initTag();
 
-        $value = preg_split('/[\s]+/', $this->description, 3);
+        $value = preg_split('/[\s]+/', $this->description??'', 3);
 
         if (isset($value[0]) === true && trim($value[0]) !== '') {
             $this->paramType = trim($value[0]);
