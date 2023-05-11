@@ -45,11 +45,11 @@ class BaseTag implements TagInterface
     /**
      * Initialize the annotation tag.
      */
-    protected function initTag()
+    protected function initTag(): void
     {
         $this->tagName = $this->definition->getTag();
 
-        $description = trim($this->definition->getDescription());
+        $description = trim(($this->definition->getDescription())??'');
         if ($description !== '') {
             $this->description = trim($this->definition->getDescription());
         }

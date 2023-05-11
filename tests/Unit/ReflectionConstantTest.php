@@ -55,9 +55,7 @@ class ReflectionConstantTest extends TestCase
             'CONSTANT2'
         );
         $actual = $reflectionConstant->getDocComment();
-        $expected = '/**
-     * This is *a comment* {};
-     */';
+        $expected = "/**\n     * This is *a comment* {};\n     */";
         $this->assertEquals($expected, $actual);
     }
     
@@ -68,9 +66,7 @@ class ReflectionConstantTest extends TestCase
             'CONSTANT3'
             );
         $actual = $reflectionConstant->getDocComment();
-        $expected = '/**
-     * This is *another comment*
-     */';
+        $expected = "/**\n     * This is *another comment*\n     */";
         $this->assertEquals($expected, $actual);
     }
 

@@ -93,10 +93,7 @@ class ReflectionMethodTest extends TestCase
         $reflection = new ReflectionMethod('\Wingu\OctopusCore\Reflection\Tests\Unit\Fixtures\ImplementorClass3',
             'methodWithNormalBody');
         $actual = $reflection->getBody();
-        $expected = "        echo 'test';
-        echo 'test';
-        echo 'test';
-        return 1;";
+        $expected = "        echo 'test';\n        echo 'test';\n        echo 'test';\n        return 1;";
         $this->assertEquals($expected, $actual);
     }
 

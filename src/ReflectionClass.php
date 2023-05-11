@@ -46,7 +46,7 @@ class ReflectionClass extends \ReflectionClass
      *
      * @return \Wingu\OctopusCore\Reflection\ReflectionClass[]
      */
-    public function getInterfaces()
+    public function getInterfaces(): array
     {
         $return = array();
 
@@ -78,7 +78,7 @@ class ReflectionClass extends \ReflectionClass
      * @param string $name The method name.
      * @return \Wingu\OctopusCore\Reflection\ReflectionMethod
      */
-    public function getMethod($name)
+    public function getMethod($name): ReflectionMethod
     {
         return new ReflectionMethod($this->getName(), $name);
     }
@@ -89,7 +89,7 @@ class ReflectionClass extends \ReflectionClass
      * @param integer $filter Filter for method types. This is an OR filter only.
      * @return \Wingu\OctopusCore\Reflection\ReflectionMethod[]
      */
-    public function getMethods($filter = -1)
+    public function getMethods($filter = -1): array
     {
         $return = parent::getMethods($filter);
         foreach ($return as $key => $val) {
@@ -135,7 +135,7 @@ class ReflectionClass extends \ReflectionClass
      *
      * @return \Wingu\OctopusCore\Reflection\ReflectionMethod
      */
-    public function getConstructor()
+    public function getConstructor(): ?ReflectionMethod
     {
         if ($this->hasMethod('__construct') === true) {
             return $this->getMethod('__construct');
@@ -164,6 +164,7 @@ class ReflectionClass extends \ReflectionClass
      *
      * @return \Wingu\OctopusCore\Reflection\ReflectionClass
      */
+    #[\ReturnTypeWillChange]
     public function getParentClass()
     {
         $parent = parent::getParentClass();
@@ -177,7 +178,7 @@ class ReflectionClass extends \ReflectionClass
      * @param string $name Name of the property.
      * @return \Wingu\OctopusCore\Reflection\ReflectionProperty
      */
-    public function getProperty($name)
+    public function getProperty($name): ReflectionProperty
     {
         return new ReflectionProperty($this->getName(), $name);
     }
@@ -188,7 +189,7 @@ class ReflectionClass extends \ReflectionClass
      * @param integer $filter Filter for the properties.
      * @return \Wingu\OctopusCore\Reflection\ReflectionProperty[]
      */
-    public function getProperties($filter = -1)
+    public function getProperties($filter = -1): array
     {
         $properties = parent::getProperties($filter);
         foreach ($properties as $key => $val) {
@@ -231,7 +232,7 @@ class ReflectionClass extends \ReflectionClass
      *
      * @return \Wingu\OctopusCore\Reflection\ReflectionConstant[] the array of constants
      */
-    public function getConstants($filter = null)
+    public function getConstants($filter = null): array
     {
         $constants = parent::getConstants();
         $returnConstants = array();
@@ -261,7 +262,7 @@ class ReflectionClass extends \ReflectionClass
      *
      * @return \Wingu\OctopusCore\Reflection\ReflectionClass[]
      */
-    public function getTraits()
+    public function getTraits(): array
     {
         $return = parent::getTraits();
         if ($return !== null) {
@@ -293,7 +294,7 @@ class ReflectionClass extends \ReflectionClass
      *
      * @return \Wingu\OctopusCore\Reflection\ReflectionExtension
      */
-    public function getExtension()
+    public function getExtension(): ?ReflectionExtension
     {
         $extensionName = $this->getExtensionName();
         if ($extensionName !== false) {
